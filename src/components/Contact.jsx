@@ -74,7 +74,7 @@ export default function Contact() {
               to get a same-day reply.
             </p>
             
-             <a href="https://wa.me/819012345678"
+             <a href="https://wa.me/+817037919654"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-primary"
