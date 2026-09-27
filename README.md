@@ -161,3 +161,7 @@ identifiable people from a general search.
 - A `Dashboard` area (behind login) where a student can see their past
   and upcoming appointments
 - An admin view for staff to see/manage bookings
+
+## Original repository note
+
+this is a project for one of my client
