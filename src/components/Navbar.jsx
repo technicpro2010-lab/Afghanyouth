@@ -37,8 +37,9 @@ export default function Navbar() {
             className="h-20 md:h-22 bg-paper px-2 py-1 transition-all duration-300 ${
             scrolled ? 'h-20 md:h-22' : 'h-12 md:h-14'"
           />
+          <h1 className="justify-center text-xl md:text-2xl font-bold">JAVELS</h1>
         </a>
-        <h1 className="justify-center text-xl md:text-2xl font-bold">JAVELS</h1>
+        
         <div className="h-full flex items-center justify-end gap-6">
         <nav
           className={`
