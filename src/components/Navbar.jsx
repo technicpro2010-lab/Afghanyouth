@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import logo from '../assets/logo.jpeg'
 
 const links = [
-  { href: '#tops', label: 'Home' },
+  { href: '#top', label: 'Home' },
   { href: '#about', label: 'Our Stories' },
   { href: '#services', label: 'Services' },
   { href: '#education-programs', label: 'Education Programs' },
