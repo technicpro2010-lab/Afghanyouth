@@ -71,7 +71,7 @@ export default function Contact() {
             <h3 className="text-paper">Prefer WhatsApp?</h3>
             <p className="text-gray-300">
               Skip the form and message us directly — usually the fastest way
-              to get a same-day reply.
+              to get a same-day reply. +81-70-3791-9654
             </p>
             
              <a href="https://wa.me/+817037919654"
