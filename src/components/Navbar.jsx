@@ -30,7 +30,8 @@ export default function Navbar() {
       >
     
       <div className="section-inner relative justify-between h-full px-6">
-        <a href="#top" className="absolute left-6 top-1/2 -translate-y-1/2 z-10 no-underline">
+        <a href="#top" className="absolute left-6 top-1/2 -translate-y-1/2 z-10 no-underline
+        flex items-center gap-3">
           <img
             src={logo}
             alt="JAVELS — Life, Business, Education"
@@ -42,7 +43,7 @@ export default function Navbar() {
       scrolled ? 'text-navy-900 text-lg' : 'text-paper text-xl'
     }`}
   >
-    JAVELS
+    JAVELS 
   </span>
         </a>
         
