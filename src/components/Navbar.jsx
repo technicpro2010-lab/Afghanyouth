@@ -31,22 +31,22 @@ export default function Navbar() {
     
       <div className="section-inner relative justify-between h-full px-6">
         <a href="#top" className="absolute left-6 top-1/2 -translate-y-1/2 z-10 no-underline
-        ">
+        flex items-center gap-3">
           <img
             src={logo}
             alt="JAVELS — Life, Business, Education"
             className="h-20 md:h-22 bg-paper px-2 py-1 transition-all duration-300 ${
             scrolled ? 'h-20 md:h-22' : 'h-12 md:h-14'"
           />
- 
-        </a>
          <span
-    className={`font-display font-semibold transition-colors duration-300 ${
-      scrolled ? 'text-navy-900 text-lg' : 'text-paper text-xl'
-    }`}
-  >
-    JAVELS 
-  </span>
+            className={`font-display font-semibold transition-colors duration-300 ${
+           scrolled ? 'text-navy-900 text-lg' : 'text-paper text-xl'
+            }`}
+          >
+            JAVELS 
+         </span>
+        </a>
+       
         
         <div className="h-full flex items-center justify-end gap-6">
         <nav
