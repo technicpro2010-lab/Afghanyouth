@@ -1,15 +1,8 @@
 const highlights = [
-  {
-    title: 'Multilingual support',
-    desc: 'Our team works with clients in multiple languages across every stage of life, business, and education in Japan.',
-  },
+
   {
     title: 'Licensed professional network',
     desc: 'Regulated services are handled in cooperation with licensed administrative scriveners, judicial scriveners, tax accountants, and real-estate professionals.',
-  },
-  {
-    title: 'One platform, not three',
-    desc: "You don't need a different provider for housing, a visa, and a Japanese class — JAVELS coordinates all three.",
   },
 ]
 

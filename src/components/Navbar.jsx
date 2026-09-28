@@ -5,7 +5,6 @@ const links = [
   { href: '#top', label: 'Home' },
   { href: '#about', label: 'Our Stories' },
   { href: '#services', label: 'Services' },
-  { href: '#education-programs', label: 'Education Programs' },
   { href: '#appointment', label: 'Book Appointment' },
   { href: '#contact', label: 'Contact' },
 ]

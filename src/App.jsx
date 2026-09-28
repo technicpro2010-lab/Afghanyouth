@@ -21,9 +21,7 @@ export default function App() {
         <Explore />
         <About />
         <Services />
-        <Scholarships />
-        <Appointment />
-        <Testimonials />
+       <Appointment />
         <Newsletter />
         <Contact />
       </main>
