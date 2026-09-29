@@ -35,8 +35,9 @@ export default function Navbar() {
           <img
             src={logo}
             alt="JAVELS — Life, Business, Education"
-            className="h-20 md:h-22 bg-paper px-2 py-1 transition-all duration-300 ${
-            scrolled ? 'h-20 md:h-22' : 'h-12 md:h-14'"
+            className={`bg-paper px-2 py-1 transition-all duration-300 ${
+              scrolled ? 'h-26 md:h-32' : 'h-20 md:h-26'
+            }`}
           />
          <span
             className={`font-display font-semibold transition-colors duration-300 ${
