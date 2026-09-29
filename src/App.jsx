@@ -21,7 +21,7 @@ export default function App() {
         <Explore />
         <About />
         <Services />
-       <Appointment />
+        <Appointment />
         <Newsletter />
         <Contact />
       </main>
