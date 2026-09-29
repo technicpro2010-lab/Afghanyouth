@@ -29,7 +29,7 @@ export default function Explore() {
   return (
     <section id="OurStories" className="section">
       <div className="section-inner">
-        <span className="eyebrow">What is JAVELS?</span>
+        <span className="eyebrow"> Our Stories</span>
         <h2 className="mb-8">One platform, three kinds of support.</h2>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {cards.map((c) => (
