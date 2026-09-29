@@ -31,20 +31,20 @@ export default function Navbar() {
     
       <div className="section-inner relative justify-between h-full px-6">
         <a href="#top" className="absolute left-6 top-1/2 -translate-y-1/2 z-10 no-underline
-        flex items-center gap-4.5">
+        flex items-center gap-6">
           <img
             src={logo}
             alt="JAVELS — Life, Business, Education"
             className={`bg-paper px-2 py-1 transition-all duration-300 ${
-              scrolled ? 'h-32 md:h-36' : 'h-26 md:h-32'
+              scrolled ? 'h-16 md:h-32' : 'h-18 md:h-36'
             }`}
           />
          <span
-            className={`font-display font-semibold transition-colors duration-300 ${
+            className={`font-display font-semibold stransition-colors duration-300 ${
            scrolled ? 'text-navy-900 text-lg' : 'text-paper text-xl'
             }`}
           >
-            JAVELS — Life, Business, Education
+            JAVELS
          </span>
         </a>
        
@@ -52,7 +52,7 @@ export default function Navbar() {
         <div className="h-full flex items-center justify-end gap-6">
         <nav
           className={`
-            gap-6 md:flex md:static md:flex-row md:border-0 md:p-0 md:bg-transparent
+            gap-5 md:flex md:static md:flex-row md:border-0 md:p-0 md:bg-transparent
             ${open ? 'flex flex-col absolute top-full left-0 right-0 bg-paper border-b border-line p-6' : 'hidden'}
           `}
         >

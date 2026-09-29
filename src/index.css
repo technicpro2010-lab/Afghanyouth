@@ -88,7 +88,7 @@
   }
 
   .nav-link {
-    @apply text-sm font-medium text-ink no-underline;
+    @apply text-xl font-medium text-ink no-underline;
   }
 
   /* Hero background photo + legibility gradient. Swap the url() below
