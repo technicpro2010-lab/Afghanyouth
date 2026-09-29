@@ -3,7 +3,7 @@ import logo from '../assets/logo.jpeg'
 
 const links = [
   { href: '#top', label: 'Home' },
-  { href: '#about', label: 'Our Stories' },
+  { href: '#OurStories', label: 'Our Stories' },
   { href: '#services', label: 'Services' },
   { href: '#appointment', label: 'Book Appointment' },
   { href: '#contact', label: 'Contact' },

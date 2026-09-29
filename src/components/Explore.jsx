@@ -27,7 +27,7 @@ const cards = [
 
 export default function Explore() {
   return (
-    <section id="about" className="section">
+    <section id="OurStories" className="section">
       <div className="section-inner">
         <span className="eyebrow">What is JAVELS?</span>
         <h2 className="mb-8">One platform, three kinds of support.</h2>
