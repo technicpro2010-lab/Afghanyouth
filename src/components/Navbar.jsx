@@ -36,7 +36,7 @@ export default function Navbar() {
             src={logo}
             alt="JAVELS — Life, Business, Education"
             className={`bg-paper px-2 py-1 transition-all duration-300 ${
-              scrolled ? 'h-16 md:h-32' : 'h-16 md:h-36'
+              scrolled ? 'h-24 md:h-42' : 'h-24 md:h-46'
             }`}
           />
          <span
@@ -44,7 +44,7 @@ export default function Navbar() {
            scrolled ? 'text-navy-900 text-lg' : 'text-paper text-xl'
             }`}
           >
-            JAVELS
+            Life. Business. Education.
          </span>
         </a>
        
