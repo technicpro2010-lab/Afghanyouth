@@ -36,7 +36,7 @@ export default function Navbar() {
             src={logo}
             alt="JAVELS — Life, Business, Education"
             className={`bg-paper px-2 py-1 transition-all duration-300 ${
-              scrolled ? 'h-32 md:h-46' : 'h-32 md:h-52'
+              scrolled ? 'w-32 md:w-40 h-auto' : 'w-40 md:w-52 h-auto'
             }`}
           />
         </a>
