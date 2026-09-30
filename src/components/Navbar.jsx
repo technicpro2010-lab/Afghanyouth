@@ -39,13 +39,6 @@ export default function Navbar() {
               scrolled ? 'h-24 md:h-42' : 'h-24 md:h-46'
             }`}
           />
-         <span
-            className={`font-display font-semibold stransition-colors duration-300 ${
-           scrolled ? 'text-navy-900 text-lg' : 'text-paper text-xl'
-            }`}
-          >
-            Life. Business. Education.
-         </span>
         </a>
        
         
