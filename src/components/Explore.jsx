@@ -27,16 +27,25 @@ const cards = [
 
 export default function Explore() {
   return (
-    <section id="OurStories" className="section">
+    <section id="explore" className="section">
       <div className="section-inner">
-        <span className="eyebrow"> Our Stories</span>
+        <span className="eyebrow">Explore JAVELS</span>
         <h2 className="mb-8">One platform, three kinds of support.</h2>
+        
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {cards.map((c) => (
-            <a key={c.title} href={c.href} className="seal-card no-underline block hover:border-brass transition-colors">
-              <h3>{c.title}</h3>
-              <p className="mb-4">{c.desc}</p>
-              <span className="text-sm font-semibold text-brass">{c.cta} →</span>
+            <a 
+              key={c.title} 
+              href={c.href} 
+              className="seal-card no-underline flex flex-col justify-between hover:border-brass transition-colors"
+            >
+              <div>
+                <h3>{c.title}</h3>
+                <p className="mt-2 mb-4 text-sm">{c.desc}</p>
+              </div>
+              <span className="text-sm font-semibold text-brass inline-flex items-center gap-1">
+                {c.cta} &rarr;
+              </span>
             </a>
           ))}
         </div>
