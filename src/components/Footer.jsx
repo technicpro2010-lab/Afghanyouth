@@ -1,8 +1,8 @@
 const socials = [
   { label: 'Facebook', href: 'https://facebook.com' },
   { label: 'Instagram', href: 'https://instagram.com' },
-  { label: 'LinkedIn', href: 'https://linkedin.com' },
-  { label: 'X', href: 'https://x.com' },
+  { label: 'WhatsApp', href: 'https://wa.me/+817037919654' },
+  
 ]
 
 export default function Footer() {
@@ -13,9 +13,9 @@ export default function Footer() {
           <div>
             <p className="text-paper font-display text-lg mb-1">JAVELS</p>
             <p className="text-gray-400 text-sm mb-0">
-              Tokyo, Japan
+              Chiba, Japan
             </p>
-            <p className="text-gray-400 text-sm">(555) 010-1234</p>
+            <p className="text-gray-400 text-sm">+81-70-3791-9654</p>
           </div>
 
           <div>

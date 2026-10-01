@@ -83,20 +83,7 @@ export default function Contact() {
             >
               Message us on WhatsApp
             </a>
-            <a href="https://www.instagram.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary"
-            >
-              Visit us on Instagram
-            </a>
-            <a href="https://www.facebook.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-primary"
-            >
-              Visit us on Facebook
-            </a>
+          
           </div>
         </div>
       </div>
