@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
-import logo from '../assets/logo.jpeg'
+import logo from '../assets/logo.jpg'
 
 const links = [
   { href: '#top', label: 'Home' },
-  { href: '#OurStories', label: 'Our Stories' },
+  { href: '#OurStory', label: 'Our Story' },
   { href: '#services', label: 'Services' },
   { href: '#appointment', label: 'Book Appointment' },
   { href: '#contact', label: 'Contact' },

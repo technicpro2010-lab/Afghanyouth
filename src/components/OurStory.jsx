@@ -5,21 +5,22 @@ const highlights = [
   },
 ]
 
-export default function OurStories() {
+export default function OurStory() {
   return (
-    <section id="mission" className="section bg-paper-dim text-center">
+    <section id="OurStory" className="section bg-paper-dim text-center">
       <div className="section-inner flex flex-col items-center gap-12">
         
         {/* Mission Header */}
         <div className="flex flex-col items-center">
-          <span className="eyebrow">Our mission</span>
-          <h2>A multilingual platform for life in Japan.</h2>
+          <span className="eyebrow">Our Story</span>
+          <h2>Connecting Poeple, Business & Opportunities</h2>
           <p className="mx-auto mt-4 text-center">
-            JAVELS helps foreign residents, families, and entrepreneurs
-            navigate life, business, and education in Japan. We provide
-            practical and educational support directly, and connect clients
-            with appropriately licensed Japanese professionals when
-            specialized services are required.
+            JAVELS was created to bridge poeple with services, professionals and opportunities
+            they need in japan.
+            Through multilingual support, practical coordination, education, and
+            growing professional network, we help individuals and businesses move
+            forward with confidence.
+            our mission is simple: to connect poeple, business and opportunies in japan 
           </p>
              {/* Highlights Section */}
             {highlights.map((h) => (

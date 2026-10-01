@@ -29,6 +29,7 @@ const pillars = [
       'Community & cultural activities',
     ],
   },
+  
 ]
 
 export default function Services() {

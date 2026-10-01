@@ -28,7 +28,7 @@ src/
   components/
     Navbar.jsx          sticky nav, collapses to a menu on mobile
     Hero.jsx            background-photo headline + calls to action
-    OurStories.jsx           org description + stats
+    OurStory.jsx           org description + stats
     Services.jsx        the 3 services offered
     Scholarships.jsx    table of open scholarships
     Appointment.jsx     booking form -> payment -> confirmation (3 steps)

@@ -18,16 +18,16 @@ const cards = [
     cta: 'See education programs',
   },
   {
-    title: 'Book a Session',
+    title: 'Book appointment',
     desc: 'Reserve a paid one-on-one consultation with our team.',
     href: '#appointment',
     cta: 'Book now',
   },
 ]
 
-export default function Explore() {
+export default function explore() {
   return (
-    <section id="explore" className="section">
+    <section id="OurStory" className="section">
       <div className="section-inner">
         <span className="eyebrow">Explore JAVELS</span>
         <h2 className="mb-8">One platform, three kinds of support.</h2>

@@ -15,11 +15,12 @@ export default function Contact() {
       <div className="section-inner flex flex-col gap-10">
         <div>
           <span className="eyebrow text-gold-light">Questions first?</span>
-          <h2 className="text-paper">Send us a message.</h2>
+          <h2 className="text-paper">let's connect.</h2>
           <p className="text-gray-200">
-            Not ready to book? Ask us anything about our services, fees, or
-            how a consultation works and we'll reply within one business day.
+            Tell us what you need. we will help you find the right next step.
           </p>
+          <h3 className="text-gray-200">JAVELS</h3>
+          <h4 className="text-gray-200">Chiba, Japan</h4>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">

@@ -2,7 +2,7 @@ import Navbar from './components/Navbar.jsx'
 import Hero from './components/Hero.jsx'
 import FeaturedQuote from './components/FeaturedQuote.jsx'
 import Explore from './components/Explore.jsx'
-import OurStories from './components/OurStories.jsx'
+import OurStory from './components/OurStory.jsx'
 import Services from './components/Services.jsx'
 // import Scholarships from './components/Scholarships.jsx'
 import Appointment from './components/Appointment.jsx'
@@ -18,8 +18,7 @@ export default function App() {
       <main>
         <Hero />
         <FeaturedQuote />
-        <Explore />
-        <OurStories />
+        <OurStory />
         <Services />
         <Appointment />
         <Newsletter />
