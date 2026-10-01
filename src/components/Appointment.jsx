@@ -75,7 +75,7 @@ export default function Appointment() {
       <div className="section-inner grid grid-cols-1 gap-10 items-start">
         <div>
           <span className="eyebrow">Book Appointment</span>
-          <h2>Talk to an advisor.</h2>
+          <h3>Talk to an advisor.</h3>
           <p>
             Choose your desired service, select an available date and time, and proceed to payment to finalize your booking.
           </p>

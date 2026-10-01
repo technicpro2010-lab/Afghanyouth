@@ -36,7 +36,7 @@ export default function Services() {
     <section id="services" className="section bg-paper-dim">
       <div className="section-inner">
         <span className="eyebrow">What we do</span>
-        <h2 className="mb-8">Three pillars of support.</h2>
+        <h3 className="mb-8">Three pillars of support.</h3>
 
         <div className="grid gap-6 sm:grid-cols-3">
           {pillars.map((p) => (

@@ -14,7 +14,7 @@ export default function Newsletter() {
   return (
     <section className="section bg-paper-dim text-center">
       <div className="section-inner max-w-lg mx-auto flex flex-col items-center gap-3">
-        <h2>Stay in touch.</h2>
+        <h3>Stay in touch.</h3>
         <p>
           Hear about new scholarships and advising slots as they open. We
           promise not to send too many emails.

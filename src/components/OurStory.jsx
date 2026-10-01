@@ -13,7 +13,7 @@ export default function OurStory() {
         {/* Mission Header */}
         <div className="flex flex-col items-center">
           <span className="eyebrow">Our Story</span>
-          <h2>Connecting Poeple, Business & Opportunities</h2>
+          <h3>Connecting Poeple, Business & Opportunities</h3>
           <p className="mx-auto mt-4 text-center">
             JAVELS was created to bridge poeple with services, professionals and opportunities
             they need in japan.

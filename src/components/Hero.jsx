@@ -4,7 +4,7 @@ export default function Hero() {
       <div className="hero-overlay" />
       <div className="section-inner relative z-10 flex flex-col items-center gap-6">
         <span className="eyebrow text-gold-light">Life · Business · Education</span>
-        <h1 className="text-paper">Supporting Life, Business &amp; Education in Japan.</h1>
+        <h2 className="text-paper">Supporting Life, Business &amp; Education in Japan.</h2>
         <p className="text-gray-200 text-lg max-w-2xl">
           JAVELS is a multilingual support and business platform helping
           foreign residents, families, and entrepreneurs navigate life,
