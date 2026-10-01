@@ -20,7 +20,8 @@ export default function Contact() {
             Tell us what you need. we will help you find the right next step.
           </p>
           <h3 className="text-gray-200">JAVELS</h3>
-          <h4 className="text-gray-200">Chiba, Japan</h4>
+          <h4 className="text-gray-200">Chiba, Japan <br /> +81-70-3791-9654</h4>
+         
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -69,7 +70,7 @@ export default function Contact() {
 
           {/* Right: direct WhatsApp contact */}
           <div className="border border-white/15 p-7 flex flex-col items-start gap-4 justify-center">
-            <h3 className="text-paper">Prefer WhatsApp?</h3>
+            <h3 className="text-paper">Prefer Other Ways to Connect?</h3>
             <p className="text-gray-300">
               Skip the form and message us directly — usually the fastest way
               to get a same-day reply. +81-70-3791-9654
@@ -81,6 +82,20 @@ export default function Contact() {
               className="btn btn-primary"
             >
               Message us on WhatsApp
+            </a>
+            <a href="https://www.instagram.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+            >
+              Visit us on Instagram
+            </a>
+            <a href="https://www.facebook.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn btn-primary"
+            >
+              Visit us on Facebook
             </a>
           </div>
         </div>
