@@ -74,11 +74,10 @@ export default function Appointment() {
     <section id="appointment" className="section bg-paper-dim">
       <div className="section-inner grid grid-cols-1 gap-10 items-start">
         <div>
-          <span className="eyebrow">Book a session</span>
+          <span className="eyebrow">Book Appointment</span>
           <h2>Talk to an advisor.</h2>
           <p>
-            Sessions are paid to keep slots reserved for students who show up.
-            Choose a service, pick a time, then complete payment to confirm.
+            Choose your desired service, select an available date and time, and proceed to payment to finalize your booking.
           </p>
         </div>
 
