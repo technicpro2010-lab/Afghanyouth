@@ -5,7 +5,7 @@ export default function Hero() {
       <div className="section-inner relative z-10 flex flex-col items-center gap-6">
         <span className="eyebrow text-gold-light">Life · Business · Education</span>
         <h2 className="text-paper">Supporting Life, Business &amp; Education in Japan.</h2>
-        <p className="text-gray-200 text-lg max-w-2xl">
+        <p className="text-paper/80 text-lg max-w-2xl">
           JAVELS is a multilingual support and business platform helping
           foreign residents, families, and entrepreneurs navigate life,
           business, and education in Japan — with direct support and

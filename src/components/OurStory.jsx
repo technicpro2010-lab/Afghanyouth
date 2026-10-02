@@ -14,7 +14,7 @@ export default function OurStory() {
         <div className="flex flex-col items-center">
           <span className="eyebrow">Our Story</span>
           <h3>Connecting Poeple, Business & Opportunities</h3>
-          <p className="mx-auto mt-4 text-xl text-center">
+          <p className="mx-auto mt-4 text-center">
             JAVELS was created to bridge poeple with services, professionals and opportunities
             they need in Japan.
             Through multilingual support, practical coordination, education, and
@@ -26,7 +26,7 @@ export default function OurStory() {
             {highlights.map((h) => (
             <div key={h.title} className="flex flex-col items-center text-center">
               <h3>{h.title}</h3>
-              <p className="mt-4 text-xl text-center mx-auto">{h.desc}</p>
+              <p className="mt-4 text-center mx-auto">{h.desc}</p>
             </div>
           ))}
         </div>

@@ -16,10 +16,10 @@ export default function Contact() {
         <div>
           <span className="eyebrow text-gold-light">Questions first?</span>
           <h3 className="text-paper">let's connect.</h3>
-          <p className="text-gray-200">
+          <p className="text-paper/80">
             Tell us what you need. we will help you find the right next step.
           </p>
-          <h4 className="text-gray-200">JAVELS</h4>
+          <h4 className="text-paper/60 mt-1">JAVELS</h4>
 
          
         </div>
@@ -69,9 +69,9 @@ export default function Contact() {
           </div>
 
           {/* Right: direct WhatsApp contact */}
-          <div className="border border-white/15 p-7 flex flex-col items-start gap-4 justify-center">
+          <div className=" p-5 flex flex-col items-start gap-5">
             <h3 className="text-paper">Prefer Other Ways to Connect?</h3>
-            <p className="text-gray-300">
+            <p className="text-paper/70">
               Skip the form and message us directly — usually the fastest way
               to get a same-day reply. +81-70-3791-9654
             </p>

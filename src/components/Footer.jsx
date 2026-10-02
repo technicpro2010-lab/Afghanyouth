@@ -16,18 +16,18 @@ export default function Footer() {
       <div className="section-inner flex flex-col gap-8">
         <div className="flex flex-col sm:flex-row justify-between gap-6">
           <div>
-            <p className="text-paper font-display text-lg mb-1">JAVELS</p>
-            <p className="text-gray-400 text-sm mb-0">
+            <h4 className="text-paper mb-1">JAVELS</h4>
+            <p className="text-paper/50 text-sm mb-0">
               Chiba, Japan
             </p>
-            <p className="text-gray-400 text-sm">+81-70-3791-9654</p>
+            <p className="text-paper/50 text-sm">+81-70-3791-9654</p>
           </div>
 
           <div>
             <p className="eyebrow text-gold-light mb-2">Connect with us</p>
             <div className="flex gap-4">
               {socials.map((s) => (
-                <a key={s.icon} href={s.href} className="text-gray-300 text-sm hover:text-paper">
+                <a key={s.icon} href={s.href} className="text-paper/50 text-sm hover:text-paper transition-colors">
 
                   <img src={s.icon} alt={s.label} className="w-8 h-8" />
                 </a>
@@ -36,7 +36,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-6 flex flex-wrap gap-2 justify-between text-xs text-gray-500">
+        <div className="border-t border-white/10 pt-6 flex flex-wrap gap-2 justify-between text-xs text-paper/30">
           <span>© {new Date().getFullYear()} JAVELS</span>
           <span>Life · Business · Education</span>
         </div>
