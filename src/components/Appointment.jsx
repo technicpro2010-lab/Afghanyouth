@@ -175,7 +175,7 @@ export default function Appointment() {
                 {form.fullName}, your {selectedService.label.toLowerCase()} is booked for{' '}
                 {form.date} at {form.time}. A confirmation was sent to {form.email}.
               </p>
-              <p className="text-sm">Reference: {transactionId}</p>
+              <p>Reference: {transactionId}</p>
               <button className="btn btn-secondary" onClick={resetFlow}>
                 Book another session
               </button>

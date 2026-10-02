@@ -17,10 +17,10 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row justify-between gap-6">
           <div>
             <h4 className="text-paper mb-1">JAVELS</h4>
-            <p className="text-paper/50 text-sm mb-0">
+            <p className="text-paper/50 mb-0">
               Chiba, Japan
             </p>
-            <p className="text-paper/50 text-sm">+81-70-3791-9654</p>
+            <p className="text-paper/50">+81-70-3791-9654</p>
           </div>
 
           <div>
