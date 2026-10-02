@@ -20,7 +20,7 @@ export default function Contact() {
             Tell us what you need. we will help you find the right next step.
           </p>
           <h4 className="text-gray-200">JAVELS</h4>
-          <h5 className="text-gray-200">Chiba, Japan <br /> +81-70-3791-9654</h5>
+
          
         </div>
 
