@@ -12,9 +12,17 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    min-height: 100dvh;
   }
   body {
     @apply bg-paper text-ink font-body text-base leading-relaxed;
+    overflow-x: hidden;
+    min-height: 100dvh;
+    /* Extend into safe areas on notched phones */
+    padding-top: env(safe-area-inset-top);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
   }
   h1, h2, h3, h4 {
     @apply font-display text-navy-900 font-semibold leading-tight;
@@ -100,9 +108,11 @@
   /* Hero background photo + legibility gradient. Swap the url() below
      for a licensed photo saved at src/assets/hero-bg.jpg. */
   .hero {
-    @apply relative bg-navy-900 bg-cover overflow-hidden;
+    @apply relative bg-navy-900 overflow-hidden;
     background-image: url('./assets/hero-bg.jpg');
-    background-position: center 30%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
   }
   .hero-overlay {
     @apply absolute inset-0;

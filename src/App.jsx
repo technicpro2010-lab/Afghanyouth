@@ -15,7 +15,7 @@ export default function App() {
   return (
     <>
       <Navbar />
-      <main>
+      <main className="pt-16 md:pt-20">
         <Hero />
         <FeaturedQuote />
         <OurStory />

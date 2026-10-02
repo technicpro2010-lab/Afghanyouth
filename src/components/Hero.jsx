@@ -1,6 +1,6 @@
 export default function Hero() {
   return (
-    <section id="top" className="section hero !py-28 md:!py-36 text-center">
+    <section id="top" className="section hero -mt-16 md:-mt-20 !pt-28 !pb-20 md:!pt-40 md:!pb-28 min-h-[100dvh] flex items-center text-center">
       <div className="hero-overlay" />
       <div className="section-inner relative z-10 flex flex-col items-center gap-6">
         <span className="eyebrow text-gold-light">Life · Business · Education</span>
