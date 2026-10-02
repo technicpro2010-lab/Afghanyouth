@@ -1,13 +1,11 @@
 import FacebookIcon from '../assets/facebook.png'
 import InstagramIcon from '../assets/instagram.png'
-import LinkedInIcon from '../assets/linkedin.png'
-import TwitterIcon from '../assets/twitter.png'
+import WhatsAppIcon from '../assets/whatsapp.png'
 
 const socials = [
   { label: 'Facebook', href: 'https://facebook.com', icon: FacebookIcon },
   { label: 'Instagram', href: 'https://instagram.com', icon: InstagramIcon },
-  { label: 'LinkedIn', href: 'https://linkedin.com', icon: LinkedInIcon },
-  { label: 'Twitter', href: 'https://twitter.com', icon: TwitterIcon },
+  { label: 'WhatsApp', href: 'https://wa.me/+817037919654', icon: WhatsAppIcon },
 ]
 
 export default function Footer() {
@@ -27,7 +25,7 @@ export default function Footer() {
             <p className="eyebrow text-gold-light mb-2">Connect with us</p>
             <div className="flex gap-4">
               {socials.map((s) => (
-                <a key={s.icon} href={s.href} className="text-paper/50 text-sm hover:text-paper transition-colors">
+                <a key={s.label} href={s.href} target="_blank" rel="noopener noreferrer" className="opacity-50 hover:opacity-100 transition-opacity">
 
                   <img src={s.icon} alt={s.label} className="w-8 h-8" />
                 </a>

@@ -69,21 +69,21 @@ export default function Contact() {
           </div>
 
           {/* Right: direct WhatsApp contact */}
-          <div className=" p-5 flex flex-col items-start gap-5">
+          <div className="p-5 flex flex-col items-start gap-5">
             <h3 className="text-paper">Prefer Other Ways to Connect?</h3>
             <p className="text-paper/70">
               Skip the form and message us directly — usually the fastest way
-              to get a same-day reply. +81-70-3791-9654
+              to get a same-day reply.
             </p>
-            
-             <a href="https://wa.me/+817037919654"
+            <a
+              href="https://wa.me/+817037919654"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-primary"
+              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             >
-              Message us on WhatsApp
+              <img src="/src/assets/whatsapp.png" alt="WhatsApp" className="w-8 h-8" />
+              <span className="text-paper font-semibold text-base">+81-70-3791-9654</span>
             </a>
-          
           </div>
         </div>
       </div>
