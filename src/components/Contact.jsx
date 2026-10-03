@@ -44,7 +44,6 @@ export default function Contact() {
           <span className="eyebrow text-gold-light">{c.eyebrow}</span>
           <h3 className="text-paper">{c.heading}</h3>
           <p className="text-paper/80">{c.body}</p>
-          <h4 className="text-paper/60 mt-1">JAVELS</h4>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
