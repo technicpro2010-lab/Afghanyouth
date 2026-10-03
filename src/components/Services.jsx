@@ -44,7 +44,7 @@ export default function Services() {
               <h3 className="mb-3">{p.title}</h3>
               <ul className="m-0 p-0 list-none flex flex-col gap-2">
                 {p.items.map((item) => (
-                  <li key={item} className="text-ink-soft flex gap-2">
+                  <li key={item} className="text-sm text-ink-soft flex gap-2">
                     <span className="text-brass">•</span>
                     <span>{item}</span>
                   </li>

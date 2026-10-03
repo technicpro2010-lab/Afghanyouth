@@ -1,14 +1,51 @@
 import { useState } from 'react'
+import emailjs from '@emailjs/browser'
 import WhatsAppIcon from '../assets/whatsapp.png'
 
-export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' })
-  const [sent, setSent] = useState(false)
+// ─────────────────────────────────────────────────────────────────────────────
+//  EmailJS configuration
+//  1. Go to https://www.emailjs.com and create a FREE account.
+//  2. Click "Email Services" → Add New Service → choose Gmail → connect your
+//     Gmail account (ghulamreza.rozbeh@gmail.com) → copy the Service ID below.
+//  3. Click "Email Templates" → Create New Template.
+//     In the template body paste:
+//       Name:    {{from_name}}
+//       Email:   {{from_email}}
+//       Message: {{message}}
+//     Set "To Email" to ghulamreza.rozbeh@gmail.com → Save → copy Template ID.
+//  4. Click your account name (top right) → "Account" → copy the Public Key.
+//  5. Replace the three placeholder strings below with your real values.
+// ─────────────────────────────────────────────────────────────────────────────
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID'    // e.g. 'service_abc123'
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'   // e.g. 'template_xyz789'
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY'    // e.g. 'AbCdEfGhIjKlMnOpQr'
+// ─────────────────────────────────────────────────────────────────────────────
 
-  function handleSubmit(event) {
+export default function Contact() {
+  const [form, setForm]     = useState({ name: '', email: '', message: '' })
+  const [status, setStatus] = useState('idle') // 'idle' | 'sending' | 'sent' | 'error'
+
+  async function handleSubmit(event) {
     event.preventDefault()
-    // Wire this up to your backend or an email service (see README).
-    setSent(true)
+    setStatus('sending')
+
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name:  form.name,
+          from_email: form.email,
+          message:    form.message,
+        },
+        EMAILJS_PUBLIC_KEY
+      )
+      setStatus('sent')
+      setForm({ name: '', email: '', message: '' })
+    } catch (err) {
+      console.error('EmailJS error:', err)
+      setStatus('error')
+    }
   }
 
   return (
@@ -21,16 +58,14 @@ export default function Contact() {
             Tell us what you need. we will help you find the right next step.
           </p>
           <h4 className="text-paper/60 mt-1">JAVELS</h4>
-
-         
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {/* Left: contact form */}
           <div>
-            {sent ? (
-              <p className="text-gold-light">
-                Thanks — your message was sent. We'll be in touch shortly.
+            {status === 'sent' ? (
+              <p className="text-gold-light font-semibold">
+                ✓ Message sent! We'll be in touch at {form.email || 'your email'} shortly.
               </p>
             ) : (
               <form onSubmit={handleSubmit} noValidate>
@@ -64,7 +99,20 @@ export default function Contact() {
                     onChange={(e) => setForm({ ...form, message: e.target.value })}
                   />
                 </div>
-                <button type="submit" className="btn btn-primary">Send message</button>
+
+                {status === 'error' && (
+                  <p className="text-danger mb-3">
+                    Something went wrong. Please try again or message us on WhatsApp.
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  disabled={status === 'sending'}
+                >
+                  {status === 'sending' ? 'Sending…' : 'Send message'}
+                </button>
               </form>
             )}
           </div>
