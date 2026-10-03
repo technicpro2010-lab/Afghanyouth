@@ -11,7 +11,6 @@ export default function FeaturedQuote() {
           "JAVELS connected us with the right support
            when we need it most."
         </blockquote>
-        <p className="text-ink-soft">— K. and J., JAVELS clients</p>
       </div>
     </section>
   )
