@@ -14,8 +14,8 @@ export default function Footer() {
   const f = t.footer
 
   return (
-    <footer className="bg-navy-900 px-6 py-12">
-      <div className="section-inner flex flex-col gap-8">
+    <footer className="bg-navy-900 px-6 py-8 md:py-10">
+      <div className="section-inner flex flex-col gap-6">
         <div className="flex flex-col sm:flex-row justify-between gap-6">
           <div>
             <h4 className="text-paper mb-1">JAVELS</h4>
@@ -36,7 +36,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-6 flex flex-wrap gap-2 justify-between text-xs text-paper/30">
+        <div className="border-t border-white/10 pt-4 flex flex-wrap gap-2 justify-between text-xs text-paper/30">
           <span>© {new Date().getFullYear()} JAVELS</span>
           <span>{f.copyright}</span>
           <span>{f.tagline}</span>

@@ -25,7 +25,7 @@ export default {
         },
         ink: {
           DEFAULT: '#1E1E1E',
-          soft: '#5B5B5B',
+          soft: '#222222',
         },
         line: '#E0DED5',
         success: '#3E7A4F',

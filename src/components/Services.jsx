@@ -8,7 +8,7 @@ export default function Services() {
     <section id="services" className="section bg-paper-dim">
       <div className="section-inner">
         <span className="eyebrow">{s.eyebrow}</span>
-        <h3 className="mb-8">{s.heading}</h3>
+        <h3 className="mb-5">{s.heading}</h3>
 
         <div className="grid gap-6 sm:grid-cols-3">
           {s.pillars.map((p) => (
@@ -16,7 +16,7 @@ export default function Services() {
               <h3 className="mb-3">{p.title}</h3>
               <ul className="m-0 p-0 list-none flex flex-col gap-2">
                 {p.items.map((item) => (
-                  <li key={item} className="text-base text-ink-soft flex gap-2">
+                  <li key={item} className="text-base text-ink flex gap-2">
                     <span className="text-brass">•</span>
                     <span>{item}</span>
                   </li>
@@ -26,7 +26,7 @@ export default function Services() {
           ))}
         </div>
 
-        <p className="mt-8 max-w-3xl">{s.disclaimer}</p>
+        <p className="mt-5 max-w-3xl">{s.disclaimer}</p>
       </div>
     </section>
   )

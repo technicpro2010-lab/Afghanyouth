@@ -15,9 +15,9 @@ export default function App() {
       <Navbar />
       <main className="pt-16 md:pt-20">
         <Hero />
-        <FeaturedQuote />
         <OurStory />
         <Services />
+        <FeaturedQuote />
         <Appointment />
         <Newsletter />
         <Contact />

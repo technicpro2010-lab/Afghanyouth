@@ -39,7 +39,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="section bg-navy-900">
-      <div className="section-inner flex flex-col gap-10">
+      <div className="section-inner flex flex-col gap-6 md:gap-8">
         <div>
           <span className="eyebrow text-gold-light">{c.eyebrow}</span>
           <h3 className="text-paper">{c.heading}</h3>
@@ -47,7 +47,7 @@ export default function Contact() {
           <h4 className="text-paper/60 mt-1">JAVELS</h4>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {/* Left: contact form */}
           <div>
             {status === 'sent' ? (

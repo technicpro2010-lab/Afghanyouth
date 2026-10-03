@@ -7,7 +7,7 @@ export const translations = {
       home: 'Home',
       ourStory: 'Our Story',
       services: 'Services',
-      appointment: 'Book Appointment',
+      appointment: 'Book a Consultation',
       contact: 'Contact',
     },
     hero: {
@@ -24,14 +24,11 @@ export const translations = {
         '"Professional, responsive, and easy to communicate with. We felt supported throughout the process."',
         '"JAVELS connected us with the right support when we needed it most."',
       ],
-      attribution: '— K. and J., JAVELS clients',
     },
     story: {
       eyebrow: 'Our Story',
       heading: 'Connecting People, Business & Opportunities',
       body: 'JAVELS was created to bridge people with services, professionals and opportunities they need in Japan. Through multilingual support, practical coordination, education, and a growing professional network, we help individuals and businesses move forward with confidence. Our mission is simple: to connect people, business and opportunities in Japan.',
-      highlightTitle: 'Licensed Professional Network',
-      highlightDesc: 'Regulated services are handled in cooperation with licensed administrative scriveners, judicial scriveners, tax accountants, and real-estate professionals.',
     },
     services: {
       eyebrow: 'What we do',
@@ -53,13 +50,13 @@ export const translations = {
       ],
     },
     appointment: {
-      eyebrow: 'Book Appointment',
-      heading: 'Talk to an advisor.',
+      eyebrow: 'Book a Consultation',
+      heading: 'Talk with us about what you need.',
       body: 'Choose your desired service, select an available date and time, and proceed to payment to finalize your booking.',
       serviceOptions: [
-        { value: 'life',       label: 'Life consultation (housing, banking, daily life)', fee: 30 },
-        { value: 'business',   label: 'Business consultation (visa, company setup, tax)', fee: 60 },
-        { value: 'education',  label: 'Education consultation (classes, scholarships)',   fee: 25 },
+        { value: 'life',       label: 'Life consultation (housing, banking, daily life)', fee: 3000 },
+        { value: 'business',   label: 'Business consultation (visa, company setup, tax)', fee: 5000 },
+        { value: 'education',  label: 'Education consultation (classes, scholarships)',   fee: 3000 },
       ],
       fields: {
         fullName: 'Full name',
@@ -139,14 +136,11 @@ export const translations = {
         '「丁寧で対応も早く、気軽に相談できました。最初から最後まで安心してサポートを受けることができました。」',
         '「必要なときに、JAVELSが適切なサポートにつないでくれました。」',
       ],
-      attribution: '— K. and J., JAVELSクライアント',
     },
     story: {
       eyebrow:       'JAVELSについて',
       heading:       '人・ビジネス・機会をつなぐ',
       body:          'JAVELSは、日本で必要なサービス、専門家、そして新たな機会へ人々をつなぐ「架け橋」となるために生まれました。多言語サポート、実務的なコーディネート、教育、そして広がり続ける専門家ネットワークを通じて、個人や事業者の皆さまが安心して次の一歩を踏み出せるようサポートします。私たちの使命はシンプルです。日本で、人・ビジネス・機会をつなぐこと。',
-      highlightTitle: '専門家ネットワーク',
-      highlightDesc:  '資格が必要となる専門業務については、行政書士、司法書士、税理士、宅地建物取引業者など、適切な資格・免許を有する専門家・事業者と連携して対応します。',
     },
     services: {
       eyebrow:    'サービス',
@@ -169,12 +163,12 @@ export const translations = {
     },
     appointment: {
       eyebrow: '相談予約',
-      heading: 'まずはご相談ください。',
+      heading: '必要なサポートについて、お気軽にご相談ください。',
       body:    'ご希望のサービスを選び、予約可能な日時を指定してください。予約内容を確認後、お支払いへお進みいただけます。',
       serviceOptions: [
-        { value: 'life',      label: '暮らしの相談（住まい・銀行・日常生活）', fee: 30 },
-        { value: 'business',  label: 'ビジネス相談（ビザ・会社設立・税務）',  fee: 60 },
-        { value: 'education', label: '教育相談（日本語・奨学金）',             fee: 25 },
+        { value: 'life',      label: '暮らしの相談（住まい・銀行・日常生活）', fee: 3000 },
+        { value: 'business',  label: 'ビジネス相談（ビザ・会社設立・税務）',  fee: 5000 },
+        { value: 'education', label: '教育相談（日本語・奨学金）',             fee: 3000 },
       ],
       fields: {
         fullName: 'お名前',
