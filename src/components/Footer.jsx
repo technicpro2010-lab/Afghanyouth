@@ -3,8 +3,8 @@ import InstagramIcon from '../assets/instagram.png'
 import WhatsAppIcon from '../assets/whatsapp.png'
 
 const socials = [
-  { label: 'Facebook', href: 'https://facebook.com', icon: FacebookIcon },
-  { label: 'Instagram', href: 'https://instagram.com', icon: InstagramIcon },
+  { label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61577939820223&sk=followers', icon: FacebookIcon },
+  { label: 'Instagram', href: 'https://www.instagram.com/javels.jp?stkn=ODVmMXEwNmEyNjgy', icon: InstagramIcon },
   { label: 'WhatsApp', href: 'https://wa.me/+817037919654', icon: WhatsAppIcon },
 ]
 

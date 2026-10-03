@@ -14,10 +14,10 @@ export default function Newsletter() {
   return (
     <section className="section bg-paper-dim text-center">
       <div className="section-inner max-w-lg mx-auto flex flex-col items-center gap-3">
-        <h3>Stay in touch.</h3>
+        <h3 className='eyebrow'>Stay in touch.</h3>
         <p>
-          Hear about new scholarships and advising slots as they open. We
-          promise not to send too many emails.
+          Get the latest from JAVELS -services, program, events, opportunities, and 
+          usefull updates for life and business in Japan
         </p>
         {submitted ? (
           <p className="text-success font-semibold">You're on the list — thank you!</p>
