@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import WhatsAppIcon from '../assets/whatsapp.png'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
@@ -81,7 +82,7 @@ export default function Contact() {
               rel="noopener noreferrer"
               className="flex items-center gap-3 hover:opacity-80 transition-opacity"
             >
-              <img src="/src/assets/whatsapp.png" alt="WhatsApp" className="w-8 h-8" />
+              <img src={WhatsAppIcon} alt="WhatsApp" className="w-8 h-8" />
               <span className="text-paper font-semibold text-base">+81-70-3791-9654</span>
             </a>
           </div>
