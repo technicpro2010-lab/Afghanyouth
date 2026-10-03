@@ -1,16 +1,18 @@
 import { useState } from 'react'
 import logo from '../assets/logo.jpg'
-
-const links = [
-  { href: '#top', label: 'Home' },
-  { href: '#OurStory', label: 'Our Story' },
-  { href: '#services', label: 'Services' },
-  { href: '#appointment', label: 'Book Appointment' },
-  { href: '#contact', label: 'Contact' },
-]
+import { useLanguage } from '../context/LanguageContext.jsx'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const { lang, setLang, t } = useLanguage()
+
+  const links = [
+    { href: '#top',         label: t.nav.home },
+    { href: '#OurStory',    label: t.nav.ourStory },
+    { href: '#services',    label: t.nav.services },
+    { href: '#appointment', label: t.nav.appointment },
+    { href: '#contact',     label: t.nav.contact },
+  ]
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 h-16 md:h-20 transition-colors duration-300 bg-white border-b border-line">
@@ -23,7 +25,7 @@ export default function Navbar() {
           />
         </a>
 
-        <div className="h-full flex items-center justify-end gap-6">
+        <div className="h-full flex items-center justify-end gap-4">
           <nav
             className={`
               gap-5 md:flex md:static md:flex-row md:border-0 md:p-0 md:bg-transparent
@@ -42,13 +44,39 @@ export default function Navbar() {
             ))}
           </nav>
 
+          {/* ── Language switcher ── */}
+          <div className="flex items-center gap-1 border border-line rounded-sm overflow-hidden text-xs font-semibold">
+            <button
+              onClick={() => setLang('en')}
+              className={`px-2.5 py-1.5 transition-colors ${
+                lang === 'en'
+                  ? 'bg-navy-900 text-paper'
+                  : 'text-ink hover:bg-paper-dim'
+              }`}
+              aria-label="Switch to English"
+            >
+              EN
+            </button>
+            <button
+              onClick={() => setLang('ja')}
+              className={`px-2.5 py-1.5 transition-colors ${
+                lang === 'ja'
+                  ? 'bg-navy-900 text-paper'
+                  : 'text-ink hover:bg-paper-dim'
+              }`}
+              aria-label="日本語に切り替える"
+            >
+              日本語
+            </button>
+          </div>
+
           <button
             aria-label="Toggle menu"
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
             className="md:hidden border border-line text-ink px-3 py-2 text-sm bg-transparent transition-colors"
           >
-            {open ? 'Close' : 'Menu'}
+            {open ? '✕' : '☰'}
           </button>
         </div>
       </div>

@@ -1,34 +1,21 @@
-const highlights = [
-  {
-    title: 'Licensed Professional Network',
-    desc: 'Regulated services are handled in cooperation with licensed administrative scriveners, judicial scriveners, tax accountants, and real-estate professionals.',
-  },
-]
+import { useLanguage } from '../context/LanguageContext.jsx'
 
 export default function OurStory() {
+  const { t } = useLanguage()
+  const s = t.story
+
   return (
     <section id="OurStory" className="section bg-paper-dim text-center">
       <div className="section-inner flex flex-col items-center gap-12">
-        
-        {/* Mission Header */}
         <div className="flex flex-col items-center">
-          <span className="eyebrow">Our Story</span>
-          <h3>Connecting Poeple, Business & Opportunities</h3>
-          <p className="mx-auto mt-4 text-center">
-            JAVELS was created to bridge poeple with services, professionals and opportunities
-            they need in Japan.
-            Through multilingual support, practical coordination, education, and
-            growing professional network, we help individuals and businesses move
-            forward with confidence.
-            our mission is simple: to connect poeple, business and opportunies in Japan 
-          </p>
-             {/* Highlights Section */}
-            {highlights.map((h) => (
-            <div key={h.title} className="flex flex-col items-center text-center">
-              <h3>{h.title}</h3>
-              <p className="mt-4 text-center mx-auto">{h.desc}</p>
-            </div>
-          ))}
+          <span className="eyebrow">{s.eyebrow}</span>
+          <h3>{s.heading}</h3>
+          <p className="mx-auto mt-4 text-center">{s.body}</p>
+
+          <div className="flex flex-col items-center text-center mt-8">
+            <h3>{s.highlightTitle}</h3>
+            <p className="mt-4 text-center mx-auto">{s.highlightDesc}</p>
+          </div>
         </div>
       </div>
     </section>

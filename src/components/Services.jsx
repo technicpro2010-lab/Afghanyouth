@@ -1,45 +1,17 @@
-const pillars = [
-  {
-    title: 'Life',
-    items: [
-      'Housing & Property Support',
-      'Banking & Card Support',
-      'Translation & Interpretation',
-      'Daily-life & Settlement Support',
-    ],
-  },
-  {
-    title: 'Business',
-    items: [
-      'Visa & Immigration',
-      'Company Establishment',
-      'Business Setup',
-      'Tax & Accounting Support',
-      'Used-Car & Vehicle Support',
-    ],
-  },
-  {
-    title: 'Education',
-    items: [
-      'Japanese Language Classes',
-      'Education Support',
-      'Seminars & Workshops',
-      'Scholarship & Educational Programs',
-      'Community & Cultural Activities',
-    ],
-  },
-  
-]
+import { useLanguage } from '../context/LanguageContext.jsx'
 
 export default function Services() {
+  const { t } = useLanguage()
+  const s = t.services
+
   return (
     <section id="services" className="section bg-paper-dim">
       <div className="section-inner">
-        <span className="eyebrow">What we do</span>
-        <h3 className="mb-8">Three pillars of support.</h3>
+        <span className="eyebrow">{s.eyebrow}</span>
+        <h3 className="mb-8">{s.heading}</h3>
 
         <div className="grid gap-6 sm:grid-cols-3">
-          {pillars.map((p) => (
+          {s.pillars.map((p) => (
             <div key={p.title} className="seal-card">
               <h3 className="mb-3">{p.title}</h3>
               <ul className="m-0 p-0 list-none flex flex-col gap-2">
@@ -54,12 +26,7 @@ export default function Services() {
           ))}
         </div>
 
-        <p className="mt-8 max-w-3xl">
-          Professional or regulated services are provided in cooperation with
-          appropriately licensed specialists, including administrative
-          scriveners, judicial scriveners, tax accountants, and real-estate
-          professionals.
-        </p>
+        <p className="mt-8 max-w-3xl">{s.disclaimer}</p>
       </div>
     </section>
   )
