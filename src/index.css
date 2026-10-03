@@ -45,11 +45,11 @@
   }
   /* Small uppercase label that sits above a section heading */
   .eyebrow {
-    @apply inline-block text-2xl font-semibold tracking-widest uppercase text-brass mb-3;
+    @apply inline-block text-1xl font-semibold tracking-widest uppercase text-brass mb-3;
   }
   /* Styled blockquote for testimonial / quote sections */
   .section-quote {
-    @apply font-display text-1xl md:text-3xl text-navy-900 leading-snug font-semibold;
+    @apply font-display text-2xl md:text-3xl text-navy-900 leading-snug font-semibold;
   }
 
   .btn {
