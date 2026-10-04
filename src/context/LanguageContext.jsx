@@ -74,11 +74,11 @@ export const translations = {
         time:     'Choose a time.',
       },
       confirmed: {
-        heading:   'Appointment confirmed',
+        heading:   'Payment confirmed',
         reference: 'Reference:',
         again:     'Book another session',
-        message:   (name, service, date, time, email) =>
-          `${name}, your ${service} is booked for ${date} at ${time}. A confirmation was sent to ${email}.`,
+        message:   (name, service, date, time) =>
+          `${name}, payment for your ${service} consultation was successful. Your requested appointment is ${date} at ${time}.`,
       },
     },
     newsletter: {
@@ -186,11 +186,11 @@ export const translations = {
         time:     '時間を選択してください。',
       },
       confirmed: {
-        heading:   '予約が確定しました',
+        heading:   'お支払いが完了しました',
         reference: '予約番号：',
         again:     '別のご予約をする',
-        message:   (name, service, date, time, email) =>
-          `${name}様、${service}のご予約が${date} ${time}に確定しました。確認メールを${email}にお送りしました。`,
+        message:   (name, service, date, time) =>
+          `${name}様、${service}の相談料金のお支払いが完了しました。ご希望の予約日時は${date} ${time}です。`,
       },
     },
     newsletter: {

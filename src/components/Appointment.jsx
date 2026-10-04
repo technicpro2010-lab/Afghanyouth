@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLanguage } from '../context/LanguageContext.jsx'
 import Payment from './Payment.jsx'
+import { stripePromise } from '../stripe.js'
 
 const initialForm = {
   fullName: '',
@@ -9,6 +10,14 @@ const initialForm = {
   date:     '',
   time:     '',
   notes:    '',
+}
+
+function clearPendingAppointment() {
+  try {
+    sessionStorage.removeItem('javels.pendingAppointment')
+  } catch (error) {
+    console.error('Unable to clear saved appointment details:', error)
+  }
 }
 
 export default function Appointment() {
@@ -20,8 +29,65 @@ export default function Appointment() {
   const [form,          setForm]          = useState(initialForm)
   const [errors,        setErrors]        = useState({})
   const [transactionId, setTransactionId] = useState(null)
+  const [paymentReturnError, setPaymentReturnError] = useState('')
 
   const selectedService = a.serviceOptions.find((s) => s.value === form.service) || a.serviceOptions[0]
+
+  useEffect(() => {
+    const url = new URL(window.location.href)
+    const clientSecret = url.searchParams.get('payment_intent_client_secret')
+    if (!clientSecret) return undefined
+
+    let active = true
+    async function restorePayment() {
+      try {
+        const stripe = await stripePromise
+        if (!stripe) throw new Error('Stripe is not configured.')
+
+        const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret)
+        if (!active) return
+        try {
+          const savedForm = sessionStorage.getItem('javels.pendingAppointment')
+          if (savedForm) setForm(JSON.parse(savedForm))
+        } catch (error) {
+          console.error('Unable to restore appointment details after Stripe redirect:', error)
+        }
+        if (paymentIntent?.status === 'succeeded') {
+          setTransactionId(paymentIntent.id)
+          setStep('confirmed')
+          clearPendingAppointment()
+        } else {
+          setPaymentReturnError(
+            lang === 'ja'
+              ? 'お支払いが完了しませんでした。詳細を確認して、もう一度お試しください。'
+              : 'Your payment did not complete. Please review the details and try again.'
+          )
+          setStep('payment')
+        }
+      } catch (error) {
+        if (!active) return
+        console.error('Unable to verify the returned Stripe payment:', error)
+        setPaymentReturnError(
+          lang === 'ja'
+            ? 'お支払い状況を確認できませんでした。もう一度お試しください。'
+            : 'We could not verify the payment status. Please try again.'
+        )
+        setStep('payment')
+      } finally {
+        if (active) {
+          url.searchParams.delete('payment_intent')
+          url.searchParams.delete('payment_intent_client_secret')
+          url.searchParams.delete('redirect_status')
+          window.history.replaceState({}, document.title, url.pathname + url.search + url.hash)
+        }
+      }
+    }
+
+    restorePayment()
+    return () => {
+      active = false
+    }
+  }, [lang])
 
   function update(field, value) {
     setForm((f) => ({ ...f, [field]: value }))
@@ -40,18 +106,17 @@ export default function Appointment() {
   function handleDetailsSubmit(event) {
     event.preventDefault()
     if (!validate()) return
+    sessionStorage.setItem('javels.pendingAppointment', JSON.stringify(form))
+    setPaymentReturnError('')
     setStep('payment')
-  }
-
-  function handlePaymentSuccess(txId) {
-    setTransactionId(txId)
-    setStep('confirmed')
   }
 
   function resetFlow() {
     setForm(initialForm)
     setErrors({})
     setTransactionId(null)
+    setPaymentReturnError('')
+    clearPendingAppointment()
     setStep('details')
   }
 
@@ -165,10 +230,18 @@ export default function Appointment() {
 
             {step === 'payment' && (
               <Payment
+                serviceId={form.service}
                 amount={selectedService.fee}
-                onBack={() => setStep('details')}
+                appointment={form}
+                onBack={() => {
+                  clearPendingAppointment()
+                  setPaymentReturnError('')
+                  setStep('details')
+                }}
+                initialError={paymentReturnError}
                 onSuccess={(txId) => {
                   setTransactionId(txId)
+                  clearPendingAppointment()
                   setStep('confirmed')
                 }}
               />

@@ -6,12 +6,28 @@ advisor appointment.
 
 ## Run it locally
 
+Copy `.env.example` to `.env` and set your Stripe test keys. The publishable
+key is used by the browser; the secret key is only used by the API server.
+Never put a Stripe secret key in frontend code or commit it.
+Use Node.js 20 or later.
+
 ```bash
 npm install
 npm run dev
 ```
 
 Open the URL Vite prints (usually http://localhost:5173).
+
+In a second terminal, run the payment API:
+
+```bash
+npm run server
+```
+
+The Vite development server forwards `/api` requests to this API on port 4242.
+Use Stripe test-mode keys and test card numbers from Stripe's documentation
+while developing. Switch to live-mode keys only after deploying the API over
+HTTPS and testing the complete payment flow.
 
 To build for production: `npm run build` (output goes to `dist/`).
 
@@ -71,73 +87,26 @@ To restyle the whole site — say, swap the accent from brass to teal — you
 edit `tailwind.config.js` (and maybe a couple of gradient values in
 `index.css`) and never touch a component file.
 
-## How the booking + payment flow works right now
+## Appointment payments
 
-`Appointment.jsx` holds a `step` state (`'details' | 'payment' | 'confirmed'`)
-and the form data. It renders:
+The appointment form uses Stripe's Payment Element. The browser sends the
+selected service and appointment details to `server/index.js`; the server
+looks up the price and creates a PaymentIntent in JPY. The amount is never
+accepted from the browser. Card details are collected by Stripe and are not
+handled by this application.
 
-1. A details form (name, email, service, date, time) with basic validation.
-2. On submit, it switches to `<Payment />`, passing the fee for the chosen
-   service.
-3. `Payment.jsx` collects card details, validates their *shape* (not
-   whether the card is real), and currently **simulates** a successful
-   charge after ~1 second.
-4. On success it calls `onSuccess(transactionId)`, which flips `Appointment`
-   to the confirmation screen.
+The local `.env` file must define both `VITE_STRIPE_PUBLISHABLE_KEY` and
+`STRIPE_SECRET_KEY`. Vite exposes only the publishable key to the client;
+keep the secret key private on the server. The current server creates
+PaymentIntents and adds appointment details to their Stripe metadata. The
+confirmation screen verifies the returned PaymentIntent with Stripe.js, but
+appointments are not yet saved to a database or calendar and no appointment
+confirmation email is sent. Add a Stripe webhook and durable appointment
+storage before treating a successful payment as a persisted booking.
 
-**This is a front-end mock.** No real money moves and no data leaves the
-browser yet. Here's the path to a real version:
-
-### 1. Add a real payment processor (Stripe is the common choice)
-
-- Create a Stripe account, get your publishable + secret keys.
-- `npm install @stripe/stripe-js @stripe/react-stripe-js` on the frontend.
-- Replace the raw `<input>` card fields in `Payment.jsx` with Stripe's
-  `<CardElement />` (or Payment Element). Stripe's library tokenizes the
-  card number in the browser — your code and your server never see or
-  store the raw card number, which keeps you out of PCI-compliance scope.
-- In `handleSubmit`, call `stripe.confirmCardPayment(...)` instead of the
-  `setTimeout` mock.
-
-### 2. Add a backend
-
-You need a server for two things the browser can't safely do:
-- Create a Stripe "PaymentIntent" (this is where the actual fee amount is
-  set — never trust an amount sent from the browser).
-- Verify the payment succeeded before you mark an appointment as booked.
-
-A minimal Node/Express sketch:
-
-```js
-// server/index.js
-app.post('/api/create-payment-intent', async (req, res) => {
-  const { serviceId } = req.body
-  const fee = FEES[serviceId] // look up server-side, don't trust the client
-  const intent = await stripe.paymentIntents.create({
-    amount: fee * 100, // Stripe uses cents
-    currency: 'usd',
-  })
-  res.json({ clientSecret: intent.client_secret })
-})
-
-app.post('/api/appointments', async (req, res) => {
-  // verify req.body.paymentIntentId succeeded with Stripe, then
-  // save the appointment to your database
-})
-```
-
-Any backend works — the important part is: **the fee amount and the "did
-payment succeed" check must happen server-side.**
-
-### 3. Persist appointments somewhere
-
-Add a database (Postgres, MongoDB, etc.) and a table/collection for
-appointments: name, email, service, date, time, status, transaction id.
-
-### 4. Send confirmation emails
-
-Use a transactional email service (Resend, Postmark, SendGrid) from your
-backend after an appointment is saved.
+The API server must be deployed with the frontend (or routed under the same
+origin at `/api`) for production. Configure the deployment's environment
+variables with live keys and use HTTPS.
 
 ## Extending the scholarship list
 

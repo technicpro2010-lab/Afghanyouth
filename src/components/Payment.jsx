@@ -1,60 +1,106 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
+import { stripePromise } from '../stripe.js'
 import { useLanguage } from '../context/LanguageContext.jsx'
 
-/**
- * Payment is a presentational + local-validation component.
- * Props:
- *  - amount: number (fee in JPY)
- *  - onSuccess: (transactionId: string) => void
- *  - onBack: () => void
- */
-export default function Payment({ amount, onSuccess, onBack }) {
+function StripePaymentForm({ onSuccess, onBack }) {
   const { lang } = useLanguage()
   const isJa = lang === 'ja'
-
-  const [form, setForm] = useState({
-    cardName: '',
-    cardNumber: '',
-    expiry: '',
-    cvc: '',
-  })
-  const [errors, setErrors] = useState({})
+  const stripe = useStripe()
+  const elements = useElements()
+  const [error, setError] = useState('')
   const [processing, setProcessing] = useState(false)
 
-  function update(field, value) {
-    setForm((f) => ({ ...f, [field]: value }))
-  }
-
-  function validate() {
-    const e = {}
-    if (!form.cardName.trim()) {
-      e.cardName = isJa ? 'カード名義人を入力してください。' : 'Enter the name on the card.'
-    }
-    if (!/^\d{13,19}$/.test(form.cardNumber.replace(/\s/g, ''))) {
-      e.cardNumber = isJa ? '有効なカード番号を入力してください。' : 'Enter a valid card number.'
-    }
-    if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(form.expiry)) {
-      e.expiry = isJa ? '有効期限はMM/YY形式で入力してください。' : 'Use MM/YY format.'
-    }
-    if (!/^\d{3,4}$/.test(form.cvc)) {
-      e.cvc = isJa ? '有効なセキュリティコードを入力してください。' : 'Enter a valid CVC.'
-    }
-    setErrors(e)
-    return Object.keys(e).length === 0
-  }
-
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault()
-    if (!validate()) return
+    if (!stripe || !elements || processing) return
 
     setProcessing(true)
+    setError('')
 
-    setTimeout(() => {
+    try {
+      const { error: stripeError, paymentIntent } = await stripe.confirmPayment({
+        elements,
+        confirmParams: { return_url: window.location.href },
+        redirect: 'if_required',
+      })
+
+      if (stripeError) {
+        setError(stripeError.message || (isJa ? 'お支払いを完了できませんでした。' : 'Payment could not be completed.'))
+      } else if (paymentIntent?.status === 'succeeded') {
+        onSuccess(paymentIntent.id)
+      } else {
+        setError(isJa ? 'お支払いの確認が完了していません。もう一度お試しください。' : 'Payment has not completed. Please try again.')
+      }
+    } catch (error) {
+      setError(error instanceof Error ? error.message : (isJa ? 'お支払いを完了できませんでした。' : 'Payment could not be completed.'))
+    } finally {
       setProcessing(false)
-      const mockTransactionId = `JV-${Date.now()}`
-      onSuccess(mockTransactionId)
-    }, 900)
+    }
   }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <PaymentElement />
+      {error && <p className="field-error mt-3" role="alert">{error}</p>}
+      <div className="flex gap-4 mt-4">
+        <button type="button" className="btn btn-secondary" onClick={onBack} disabled={processing}>
+          {isJa ? '戻る' : 'Back'}
+        </button>
+        <button type="submit" className="btn btn-primary" disabled={!stripe || processing}>
+          {processing
+            ? (isJa ? '処理中…' : 'Processing…')
+            : (isJa ? '支払う' : 'Pay')}
+        </button>
+      </div>
+    </form>
+  )
+}
+
+export default function Payment({ serviceId, amount, appointment, onSuccess, onBack, initialError }) {
+  const { lang } = useLanguage()
+  const isJa = lang === 'ja'
+  const [clientSecret, setClientSecret] = useState('')
+  const [error, setError] = useState('')
+  const [attempt, setAttempt] = useState(0)
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    if (!stripePromise) return undefined
+
+    const controller = new AbortController()
+    async function createIntent() {
+      setLoading(true)
+      setError('')
+      try {
+        const response = await fetch('/api/create-payment-intent', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          signal: controller.signal,
+          body: JSON.stringify({
+            serviceId,
+            fullName: appointment.fullName,
+            email: appointment.email,
+            date: appointment.date,
+            time: appointment.time,
+          }),
+        })
+        const result = await response.json()
+        if (!response.ok) throw new Error(result.error || 'Unable to start payment.')
+        if (!result.clientSecret) throw new Error('The payment server returned an invalid response.')
+        setClientSecret(result.clientSecret)
+      } catch (requestError) {
+        if (requestError.name !== 'AbortError') {
+          setError(requestError.message || (isJa ? 'お支払いを開始できませんでした。' : 'Unable to start payment.'))
+        }
+      } finally {
+        if (!controller.signal.aborted) setLoading(false)
+      }
+    }
+
+    createIntent()
+    return () => controller.abort()
+  }, [serviceId, appointment, attempt, isJa])
 
   const formattedAmount = `¥${amount.toLocaleString()}`
 
@@ -62,71 +108,41 @@ export default function Payment({ amount, onSuccess, onBack }) {
     <div>
       <h3 className="mb-1">{isJa ? '相談料金のお支払い' : 'Pay the consultation fee'}</h3>
       <p className="mb-4">
-        {isJa ? 'ご請求金額：' : 'Amount due: '}{' '}
+        {isJa ? 'ご請求金額：' : 'Amount due: '}
         <strong className="text-ink font-semibold text-base">{formattedAmount}</strong>
       </p>
 
-      <form onSubmit={handleSubmit} noValidate>
-        <div className="field">
-          <label htmlFor="cardName">{isJa ? 'カード名義人' : 'Name on card'}</label>
-          <input
-            id="cardName"
-            type="text"
-            placeholder={isJa ? 'TARO YAMADA' : 'Full Name'}
-            value={form.cardName}
-            onChange={(e) => update('cardName', e.target.value)}
-          />
-          {errors.cardName && <span className="field-error">{errors.cardName}</span>}
-        </div>
-
-        <div className="field">
-          <label htmlFor="cardNumber">{isJa ? 'カード番号' : 'Card number'}</label>
-          <input
-            id="cardNumber"
-            type="text"
-            inputMode="numeric"
-            placeholder="1234 1234 1234 1234"
-            value={form.cardNumber}
-            onChange={(e) => update('cardNumber', e.target.value)}
-          />
-          {errors.cardNumber && <span className="field-error">{errors.cardNumber}</span>}
-        </div>
-
-        <div className="flex flex-col sm:flex-row gap-4">
-          <div className="field flex-1">
-            <label htmlFor="expiry">{isJa ? '有効期限' : 'Expiry'}</label>
-            <input
-              id="expiry"
-              type="text"
-              placeholder="MM/YY"
-              value={form.expiry}
-              onChange={(e) => update('expiry', e.target.value)}
-            />
-            {errors.expiry && <span className="field-error">{errors.expiry}</span>}
-          </div>
-          <div className="field flex-1">
-            <label htmlFor="cvc">{isJa ? 'セキュリティコード' : 'CVC'}</label>
-            <input
-              id="cvc"
-              type="text"
-              inputMode="numeric"
-              placeholder="123"
-              value={form.cvc}
-              onChange={(e) => update('cvc', e.target.value)}
-            />
-            {errors.cvc && <span className="field-error">{errors.cvc}</span>}
-          </div>
-        </div>
-
-        <div className="flex gap-4 mt-3">
-          <button type="button" className="btn btn-secondary" onClick={onBack} disabled={processing}>
-            {isJa ? '戻る' : 'Back'}
-          </button>
-          <button type="submit" className="btn btn-primary" disabled={processing}>
-            {processing ? (isJa ? '処理中…' : 'Processing…') : `${isJa ? '支払う' : 'Pay'} ${formattedAmount}`}
+      {!stripePromise && (
+        <p className="field-error mb-4" role="alert">
+          {isJa
+            ? 'Stripeが設定されていません。サイト管理者にお問い合わせください。'
+            : 'Stripe is not configured. Please contact the site administrator.'}
+        </p>
+      )}
+      {initialError && <p className="field-error mb-4" role="alert">{initialError}</p>}
+      {stripePromise && loading && <p role="status">{isJa ? 'お支払いを準備しています…' : 'Preparing secure payment…'}</p>}
+      {stripePromise && error && (
+        <div className="mb-4">
+          <p className="field-error" role="alert">{error}</p>
+          <button type="button" className="btn btn-secondary mt-3" onClick={() => setAttempt((value) => value + 1)}>
+            {isJa ? '再試行' : 'Try again'}
           </button>
         </div>
-      </form>
+      )}
+      {stripePromise && clientSecret && !loading && !error && (
+        <Elements stripe={stripePromise} options={{ clientSecret }}>
+          <StripePaymentForm onSuccess={onSuccess} onBack={onBack} />
+        </Elements>
+      )}
+      <button
+        type="button"
+        className="btn btn-secondary mt-3"
+        onClick={onBack}
+        disabled={loading}
+        hidden={Boolean(clientSecret && !loading && !error)}
+      >
+        {isJa ? '戻る' : 'Back'}
+      </button>
     </div>
   )
 }
