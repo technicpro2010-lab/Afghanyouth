@@ -33,7 +33,7 @@ export const translations = {
     services: {
       eyebrow: 'What we do',
       heading: 'Three pillars of support.',
-      disclaimer: 'Professional or regulated services are provided in cooperation with appropriately licensed specialists, including administrative scriveners, judicial scriveners, tax accountants, and real-estate professionals.',
+      disclaimer: 'Licensed Professional Network:\nRegulated professional services are handled in cooperation with appropriately licensed specialists, including administrative scriveners, judicial scriveners, tax accountants, and real-estate professionals.',
       pillars: [
         {
           title: 'Life',
@@ -83,7 +83,7 @@ export const translations = {
     },
     newsletter: {
       heading:     'Stay in touch.',
-      body:        'Hear about new scholarships and advising slots as they open. We promise not to send too many emails.',
+      body:        'Get the latest from JAVELS-services, programs, events, opportunities, and useful updates for life and business in Japan.',
       placeholder: 'Email address',
       submit:      'Sign up',
       success:     "You're on the list — thank you!",
