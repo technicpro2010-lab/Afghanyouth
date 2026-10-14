@@ -100,12 +100,13 @@ collected by Stripe and are not handled by this application.
 The local `.env` file must define both `VITE_STRIPE_PUBLISHABLE_KEY` (a Stripe
 publishable key beginning with `pk_`) and `STRIPE_SECRET_KEY` (a secret key
 beginning with `sk_`). In Cloudflare Pages, add `VITE_STRIPE_PUBLISHABLE_KEY`
-and `STRIPE_SECRET_KEY` as variables/secrets for the Production environment
-(and Preview if needed). The Pages Function reads the publishable key at
-runtime from `/api/stripe-config`, so it does not have to be embedded in the
-frontend build. `STRIPE_SECRET_KEY` must remain a secret runtime variable. Use
-keys from the same Stripe account and mode; never use a restricted key (`rk_`)
-as the publishable key or expose the secret key to the browser. The API creates
+and `STRIPE_SECRET_KEY` for the Production environment (and Preview if needed).
+Set `VITE_STRIPE_PUBLISHABLE_KEY` as a build variable and, if using the
+`/api/stripe-config` Pages Function, also as a runtime variable. The frontend
+tries the runtime endpoint first and falls back to the publishable build
+variable. `STRIPE_SECRET_KEY` must remain a secret runtime variable. Use keys
+from the same Stripe account and mode; never use a restricted key (`rk_`) as
+the publishable key or expose the secret key to the browser. The API creates
 PaymentIntents and adds appointment details to their Stripe metadata. The
 confirmation screen verifies the returned PaymentIntent with Stripe.js, but
 appointments are not yet saved to a database or calendar and no appointment
