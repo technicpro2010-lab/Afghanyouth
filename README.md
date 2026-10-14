@@ -90,23 +90,30 @@ edit `tailwind.config.js` (and maybe a couple of gradient values in
 ## Appointment payments
 
 The appointment form uses Stripe's Payment Element. The browser sends the
-selected service and appointment details to `server/index.js`; the server
-looks up the price and creates a PaymentIntent in JPY. The amount is never
-accepted from the browser. Card details are collected by Stripe and are not
-handled by this application.
+selected service and appointment details to `/api/create-payment-intent`.
+Cloudflare Pages handles this route with
+`functions/api/create-payment-intent.js`; local development forwards the route
+to `server/index.js`. The server looks up the price and creates a PaymentIntent
+in JPY. The amount is never accepted from the browser. Card details are
+collected by Stripe and are not handled by this application.
 
-The local `.env` file must define both `VITE_STRIPE_PUBLISHABLE_KEY` and
-`STRIPE_SECRET_KEY`. Vite exposes only the publishable key to the client;
-keep the secret key private on the server. The current server creates
-PaymentIntents and adds appointment details to their Stripe metadata. The
-confirmation screen verifies the returned PaymentIntent with Stripe.js, but
-appointments are not yet saved to a database or calendar and no appointment
-confirmation email is sent. Add a Stripe webhook and durable appointment
-storage before treating a successful payment as a persisted booking.
+The local `.env` file must define both `VITE_STRIPE_PUBLISHABLE_KEY` (a Stripe
+publishable key beginning with `pk_`) and `STRIPE_SECRET_KEY` (a secret key
+beginning with `sk_`). In Cloudflare Pages, add `VITE_STRIPE_PUBLISHABLE_KEY`
+as a build environment variable and `STRIPE_SECRET_KEY` as a secret runtime
+variable for the Production environment (and Preview if needed), then
+redeploy. Use keys from the same Stripe account and mode; never use a
+restricted key (`rk_`) as the publishable key or expose the secret key to the
+browser. The API creates PaymentIntents and adds appointment details to their
+Stripe metadata. The confirmation screen verifies the returned PaymentIntent
+with Stripe.js, but appointments are not yet saved to a database or calendar
+and no appointment confirmation email is sent. Add a Stripe webhook and
+durable appointment storage before treating a successful payment as a
+persisted booking.
 
-The API server must be deployed with the frontend (or routed under the same
-origin at `/api`) for production. Configure the deployment's environment
-variables with live keys and use HTTPS.
+Cloudflare Pages deploys the API function alongside the frontend at the same
+origin. Use live-mode keys for Production only after testing the full payment
+flow with test-mode keys over HTTPS.
 
 ## Extending the scholarship list
 

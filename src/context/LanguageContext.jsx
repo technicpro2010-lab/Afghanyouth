@@ -235,10 +235,30 @@ export function LanguageProvider({ children }) {
     return localStorage.getItem('javels-lang') || 'en'
   })
 
-  // Persist choice and update <html lang=""> for accessibility / SEO
+  // Persist choice and update <html lang=""> and dynamic meta tags for SEO
   useEffect(() => {
     localStorage.setItem('javels-lang', lang)
     document.documentElement.lang = lang
+
+    if (lang === 'ja') {
+      document.title = 'JAVELS — 日本での暮らし・ビジネス・学びを多言語でサポート'
+      const metaDesc = document.querySelector('meta[name="description"]')
+      if (metaDesc) {
+        metaDesc.setAttribute(
+          'content',
+          'JAVELSは、日本で暮らす外国人、ご家族、起業家の皆さまを対象に、住まい・ビザ・会社設立・税務・教育を多言語でサポートするプラットフォームです。'
+        )
+      }
+    } else {
+      document.title = 'JAVELS — Multilingual Life, Business & Education Support in Japan'
+      const metaDesc = document.querySelector('meta[name="description"]')
+      if (metaDesc) {
+        metaDesc.setAttribute(
+          'content',
+          'JAVELS is a trusted multilingual support platform in Japan helping foreign residents, families, and entrepreneurs with housing, banking, visas, company setup, tax advisory, and education.'
+        )
+      }
+    }
   }, [lang])
 
   const t = translations[lang]

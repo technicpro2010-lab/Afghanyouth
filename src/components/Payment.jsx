@@ -83,6 +83,7 @@ export default function Payment({ serviceId, amount, appointment, onSuccess, onB
             email: appointment.email,
             date: appointment.date,
             time: appointment.time,
+            notes: appointment.notes,
           }),
         })
         const result = await response.json()

@@ -9,7 +9,7 @@ export default function Hero() {
       <div className="hero-overlay" />
       <div className="section-inner relative z-10 flex flex-col items-center gap-6">
         <span className="eyebrow text-gold-light">{h.eyebrow}</span>
-        <h2 className="text-paper">{h.heading}</h2>
+        <h1 className="text-paper">{h.heading}</h1>
         <p className="text-paper/80">{h.body}</p>
         <div className="flex gap-4 flex-wrap justify-center mt-2">
           <a href="#appointment" className="btn btn-primary">{h.cta1}</a>

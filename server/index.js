@@ -20,7 +20,7 @@ app.post('/api/create-payment-intent', async (req, res) => {
     return res.status(503).json({ error: 'Stripe is not configured on the server.' })
   }
 
-  const { serviceId, fullName, email, date, time } = req.body ?? {}
+  const { serviceId, fullName, email, date, time, notes } = req.body ?? {}
   if (!Object.hasOwn(fees, serviceId)) {
     return res.status(400).json({ error: 'Select a valid consultation service.' })
   }
@@ -28,7 +28,8 @@ app.post('/api/create-payment-intent', async (req, res) => {
     typeof fullName !== 'string' || !fullName.trim() || fullName.length > 120 ||
     typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254 ||
     typeof date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
-    typeof time !== 'string' || !/^\d{2}:\d{2}$/.test(time)
+    typeof time !== 'string' || !/^\d{2}:\d{2}$/.test(time) ||
+    (notes !== undefined && (typeof notes !== 'string' || notes.length > 1000))
   ) {
     return res.status(400).json({ error: 'Appointment details are incomplete or invalid.' })
   }
@@ -45,6 +46,7 @@ app.post('/api/create-payment-intent', async (req, res) => {
         customer_name: fullName.trim(),
         appointment_date: date,
         appointment_time: time,
+        appointment_notes: (notes || '').trim().slice(0, 500),
       },
     })
     return res.json({ clientSecret: paymentIntent.client_secret })
@@ -57,3 +59,4 @@ app.post('/api/create-payment-intent', async (req, res) => {
 app.listen(port, () => {
   console.log(`Stripe API server listening on http://localhost:${port}`)
 })
+

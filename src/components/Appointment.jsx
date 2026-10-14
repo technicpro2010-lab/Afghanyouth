@@ -137,7 +137,7 @@ export default function Appointment() {
             <ul className="space-y-2.5">
               {a.serviceOptions.map((s) => (
                 <li key={s.value} className="flex justify-between items-center text-sm">
-                  <span className="text-ink-soft">{s.label.split('(')[0].trim()}</span>
+                  <span className="text-ink">{s.label.split('(')[0].trim()}</span>
                   <span className="font-semibold text-navy-900">¥{s.fee.toLocaleString()}</span>
                 </li>
               ))}
@@ -260,7 +260,7 @@ export default function Appointment() {
                   )}
                 </p>
                 <div className="bg-paper-dim border border-line p-3 text-sm rounded-sm">
-                  <span className="text-ink-soft">{a.confirmed.reference}</span>{' '}
+                  <span className="text-ink">{a.confirmed.reference}</span>{' '}
                   <strong className="text-ink">{transactionId}</strong>
                 </div>
                 <button className="btn btn-secondary mt-2" onClick={resetFlow}>
