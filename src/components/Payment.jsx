@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Elements, PaymentElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import { stripePromise } from '../stripe.js'
+import { getStripe } from '../stripe.js'
 import { useLanguage } from '../context/LanguageContext.jsx'
 
 function StripePaymentForm({ onSuccess, onBack }) {
@@ -61,18 +61,20 @@ export default function Payment({ serviceId, amount, appointment, onSuccess, onB
   const { lang } = useLanguage()
   const isJa = lang === 'ja'
   const [clientSecret, setClientSecret] = useState('')
+  const [stripe, setStripe] = useState(null)
   const [error, setError] = useState('')
   const [attempt, setAttempt] = useState(0)
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    if (!stripePromise) return undefined
-
     const controller = new AbortController()
     async function createIntent() {
       setLoading(true)
       setError('')
+      setStripe(null)
+      setClientSecret('')
       try {
+        const stripeInstance = await getStripe()
         const response = await fetch('/api/create-payment-intent', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -89,9 +91,11 @@ export default function Payment({ serviceId, amount, appointment, onSuccess, onB
         const result = await response.json()
         if (!response.ok) throw new Error(result.error || 'Unable to start payment.')
         if (!result.clientSecret) throw new Error('The payment server returned an invalid response.')
+        if (controller.signal.aborted) return
+        setStripe(stripeInstance)
         setClientSecret(result.clientSecret)
       } catch (requestError) {
-        if (requestError.name !== 'AbortError') {
+        if (!controller.signal.aborted && requestError.name !== 'AbortError') {
           setError(requestError.message || (isJa ? 'お支払いを開始できませんでした。' : 'Unable to start payment.'))
         }
       } finally {
@@ -113,16 +117,9 @@ export default function Payment({ serviceId, amount, appointment, onSuccess, onB
         <strong className="text-ink font-semibold text-base">{formattedAmount}</strong>
       </p>
 
-      {!stripePromise && (
-        <p className="field-error mb-4" role="alert">
-          {isJa
-            ? 'Stripeが設定されていません。サイト管理者にお問い合わせください。'
-            : 'Stripe is not configured. Please contact the site administrator.'}
-        </p>
-      )}
       {initialError && <p className="field-error mb-4" role="alert">{initialError}</p>}
-      {stripePromise && loading && <p role="status">{isJa ? 'お支払いを準備しています…' : 'Preparing secure payment…'}</p>}
-      {stripePromise && error && (
+      {loading && <p role="status">{isJa ? 'お支払いを準備しています…' : 'Preparing secure payment…'}</p>}
+      {error && (
         <div className="mb-4">
           <p className="field-error" role="alert">{error}</p>
           <button type="button" className="btn btn-secondary mt-3" onClick={() => setAttempt((value) => value + 1)}>
@@ -130,8 +127,8 @@ export default function Payment({ serviceId, amount, appointment, onSuccess, onB
           </button>
         </div>
       )}
-      {stripePromise && clientSecret && !loading && !error && (
-        <Elements stripe={stripePromise} options={{ clientSecret }}>
+      {stripe && clientSecret && !loading && !error && (
+        <Elements stripe={stripe} options={{ clientSecret }}>
           <StripePaymentForm onSuccess={onSuccess} onBack={onBack} />
         </Elements>
       )}

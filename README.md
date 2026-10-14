@@ -100,16 +100,17 @@ collected by Stripe and are not handled by this application.
 The local `.env` file must define both `VITE_STRIPE_PUBLISHABLE_KEY` (a Stripe
 publishable key beginning with `pk_`) and `STRIPE_SECRET_KEY` (a secret key
 beginning with `sk_`). In Cloudflare Pages, add `VITE_STRIPE_PUBLISHABLE_KEY`
-as a build environment variable and `STRIPE_SECRET_KEY` as a secret runtime
-variable for the Production environment (and Preview if needed), then
-redeploy. Use keys from the same Stripe account and mode; never use a
-restricted key (`rk_`) as the publishable key or expose the secret key to the
-browser. The API creates PaymentIntents and adds appointment details to their
-Stripe metadata. The confirmation screen verifies the returned PaymentIntent
-with Stripe.js, but appointments are not yet saved to a database or calendar
-and no appointment confirmation email is sent. Add a Stripe webhook and
-durable appointment storage before treating a successful payment as a
-persisted booking.
+and `STRIPE_SECRET_KEY` as variables/secrets for the Production environment
+(and Preview if needed). The Pages Function reads the publishable key at
+runtime from `/api/stripe-config`, so it does not have to be embedded in the
+frontend build. `STRIPE_SECRET_KEY` must remain a secret runtime variable. Use
+keys from the same Stripe account and mode; never use a restricted key (`rk_`)
+as the publishable key or expose the secret key to the browser. The API creates
+PaymentIntents and adds appointment details to their Stripe metadata. The
+confirmation screen verifies the returned PaymentIntent with Stripe.js, but
+appointments are not yet saved to a database or calendar and no appointment
+confirmation email is sent. Add a Stripe webhook and durable appointment
+storage before treating a successful payment as a persisted booking.
 
 Cloudflare Pages deploys the API function alongside the frontend at the same
 origin. Use live-mode keys for Production only after testing the full payment

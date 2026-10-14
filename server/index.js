@@ -15,6 +15,16 @@ const stripe = process.env.STRIPE_SECRET_KEY
 
 app.use(express.json())
 
+app.get('/api/stripe-config', (req, res) => {
+  const publishableKey = process.env.VITE_STRIPE_PUBLISHABLE_KEY
+  if (typeof publishableKey !== 'string' || !publishableKey.startsWith('pk_')) {
+    return res.status(503).json({ error: 'Stripe publishable key is not configured on the server.' })
+  }
+
+  res.set('Cache-Control', 'no-store')
+  return res.json({ publishableKey })
+})
+
 app.post('/api/create-payment-intent', async (req, res) => {
   if (!stripe) {
     return res.status(503).json({ error: 'Stripe is not configured on the server.' })
@@ -59,4 +69,3 @@ app.post('/api/create-payment-intent', async (req, res) => {
 app.listen(port, () => {
   console.log(`Stripe API server listening on http://localhost:${port}`)
 })
-

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useLanguage } from '../context/LanguageContext.jsx'
 import Payment from './Payment.jsx'
-import { stripePromise } from '../stripe.js'
+import { getStripe } from '../stripe.js'
 
 const initialForm = {
   fullName: '',
@@ -41,8 +41,7 @@ export default function Appointment() {
     let active = true
     async function restorePayment() {
       try {
-        const stripe = await stripePromise
-        if (!stripe) throw new Error('Stripe is not configured.')
+        const stripe = await getStripe()
 
         const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret)
         if (!active) return
