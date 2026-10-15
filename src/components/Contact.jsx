@@ -5,6 +5,8 @@ import { useLanguage } from '../context/LanguageContext.jsx'
 
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const EMAILJS_CONFIRMATION_TEMPLATE_ID =
+  import.meta.env.VITE_EMAILJS_CONFIRMATION_TEMPLATE_ID || EMAILJS_TEMPLATE_ID
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
 export default function Contact() {
@@ -12,17 +14,17 @@ export default function Contact() {
   const c = t.contact
 
   const [form,   setForm]   = useState({ name: '', email: '', message: '' })
-  const [status, setStatus] = useState('idle') // idle | sending | sent | error | configuration-error
+  const [status, setStatus] = useState('idle') // idle | sending | sent | sent-confirmation-error | error | configuration-error
 
   async function handleSubmit(event) {
     event.preventDefault()
-    setStatus('sending')
     if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
       console.error('Contact form is not configured. Set the EmailJS environment variables.')
       setStatus('configuration-error')
       return
     }
 
+    setStatus('sending')
     try {
       await emailjs.send(
         EMAILJS_SERVICE_ID,
@@ -36,11 +38,30 @@ export default function Contact() {
         },
         EMAILJS_PUBLIC_KEY
       )
-      setStatus('sent')
-      setForm({ name: '', email: '', message: '' })
     } catch (err) {
       console.error('EmailJS error:', err)
       setStatus('error')
+      return
+    }
+
+    setForm({ name: '', email: '', message: '' })
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_CONFIRMATION_TEMPLATE_ID,
+        {
+          to_email: form.email,
+          from_name: form.name,
+          from_email: form.email,
+          reply_to: 'info@javels.com',
+          message: form.message,
+        },
+        EMAILJS_PUBLIC_KEY
+      )
+      setStatus('sent')
+    } catch (err) {
+      console.error('EmailJS confirmation error:', err)
+      setStatus('sent-confirmation-error')
     }
   }
 
@@ -56,8 +77,12 @@ export default function Contact() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {/* Left: contact form */}
           <div>
-            {status === 'sent' ? (
-              <p className="text-gold-light font-semibold">{c.form.success}</p>
+            {['sent', 'sent-confirmation-error'].includes(status) ? (
+              <p className="text-gold-light font-semibold">
+                {status === 'sent'
+                  ? c.form.success
+                  : c.form.confirmationError}
+              </p>
             ) : (
               <form onSubmit={handleSubmit} noValidate>
                 <div className="field">

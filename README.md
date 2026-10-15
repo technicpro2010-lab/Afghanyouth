@@ -39,15 +39,24 @@ local `.env` file (see `.env.example`) and in the frontend build environment
 for your deployment:
 
 - `VITE_EMAILJS_SERVICE_ID`
-- `VITE_EMAILJS_TEMPLATE_ID`
+- `VITE_EMAILJS_TEMPLATE_ID` (notification to JAVELS)
+- `VITE_EMAILJS_CONFIRMATION_TEMPLATE_ID` (optional; defaults to the notification template)
 - `VITE_EMAILJS_PUBLIC_KEY`
 
-Configure the EmailJS template's **To Email** as `{{to_email}}` and **Reply To**
-as `{{reply_to}}`. The template can use `{{from_name}}`, `{{from_email}}`, and
-`{{message}}` for the client's details and message. The form supplies
+Configure the notification template's **To Email** as `{{to_email}}` and
+**Reply To** as `{{reply_to}}`. It can use `{{from_name}}`, `{{from_email}}`,
+and `{{message}}` for the client's details and message. The form supplies
 `info@javels.com` as `to_email` and the client's address as `reply_to`.
-Submissions cannot be delivered until the EmailJS service and template are
-configured and these environment variables are set.
+
+For client confirmations, create a second EmailJS template, set its **To Email**
+as `{{to_email}}`, and use `{{from_name}}` and `{{message}}` as desired in its
+body. The form supplies the submitting client's address as `to_email`. You can
+reuse the notification template ID instead; it must also use `{{to_email}}` as
+its recipient, and the client will receive the same email content as JAVELS.
+If the confirmation template ID is omitted, the form uses the notification
+template for the client copy.
+Submissions cannot be delivered until the notification template and EmailJS
+service are configured and the required environment variables are set.
 
 ## Project structure
 
