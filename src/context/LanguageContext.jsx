@@ -99,7 +99,8 @@ export const translations = {
         submit:   'Send message',
         sending:  'Sending…',
         success:  "✓ Message sent! We'll be in touch shortly.",
-        error:    'Something went wrong. Please try again or message us on WhatsApp.',
+        error:    'We could not send your message. Please try again or email info@javels.com.',
+        configurationError: 'This form is not set up to send messages yet. Please email info@javels.com or contact us on WhatsApp.',
       },
       whatsapp: {
         heading: 'Prefer Other Ways to Connect?',
@@ -211,7 +212,8 @@ export const translations = {
         submit:  '送信する',
         sending: '送信中…',
         success: '✓ メッセージを送信しました。近日中にご連絡いたします。',
-        error:   'エラーが発生しました。再度お試しいただくか、WhatsAppでお問い合わせください。',
+        error:   'メッセージを送信できませんでした。再度お試しいただくか、info@javels.com までメールでお問い合わせください。',
+        configurationError: '現在、このフォームからメッセージを送信できません。info@javels.com へのメール、またはWhatsAppでお問い合わせください。',
       },
       whatsapp: {
         heading: 'その他のお問い合わせ方法',
