@@ -3,14 +3,9 @@ import emailjs from '@emailjs/browser'
 import WhatsAppIcon from '../assets/whatsapp.png'
 import { useLanguage } from '../context/LanguageContext.jsx'
 
-// ─────────────────────────────────────────────────────────────────────────────
-//  EmailJS configuration — replace these three values after signing up at
-//  https://www.emailjs.com (see README or previous setup instructions).
-// ─────────────────────────────────────────────────────────────────────────────
-const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID'
-const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID'
-const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY'
-// ─────────────────────────────────────────────────────────────────────────────
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
 export default function Contact() {
   const { t } = useLanguage()
@@ -22,11 +17,23 @@ export default function Contact() {
   async function handleSubmit(event) {
     event.preventDefault()
     setStatus('sending')
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+      console.error('Contact form is not configured. Set the EmailJS environment variables.')
+      setStatus('error')
+      return
+    }
+
     try {
       await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
-        { from_name: form.name, from_email: form.email, message: form.message },
+        {
+          to_email: 'info@javels.com',
+          from_name: form.name,
+          from_email: form.email,
+          reply_to: form.email,
+          message: form.message,
+        },
         EMAILJS_PUBLIC_KEY
       )
       setStatus('sent')

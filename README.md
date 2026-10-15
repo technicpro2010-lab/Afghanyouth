@@ -31,6 +31,24 @@ HTTPS and testing the complete payment flow.
 
 To build for production: `npm run build` (output goes to `dist/`).
 
+## Contact form email
+
+The contact form sends submissions through EmailJS to `info@javels.com`.
+Create an EmailJS email service and template, then set these variables in your
+local `.env` file (see `.env.example`) and in the frontend build environment
+for your deployment:
+
+- `VITE_EMAILJS_SERVICE_ID`
+- `VITE_EMAILJS_TEMPLATE_ID`
+- `VITE_EMAILJS_PUBLIC_KEY`
+
+Configure the EmailJS template's **To Email** as `{{to_email}}` and **Reply To**
+as `{{reply_to}}`. The template can use `{{from_name}}`, `{{from_email}}`, and
+`{{message}}` for the client's details and message. The form supplies
+`info@javels.com` as `to_email` and the client's address as `reply_to`.
+Submissions cannot be delivered until the EmailJS service and template are
+configured and these environment variables are set.
+
 ## Project structure
 
 ```
