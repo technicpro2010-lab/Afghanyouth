@@ -12,14 +12,14 @@ export default function Contact() {
   const c = t.contact
 
   const [form,   setForm]   = useState({ name: '', email: '', message: '' })
-  const [status, setStatus] = useState('idle') // idle | sending | sent | error
+  const [status, setStatus] = useState('idle') // idle | sending | sent | error | configuration-error
 
   async function handleSubmit(event) {
     event.preventDefault()
     setStatus('sending')
     if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
       console.error('Contact form is not configured. Set the EmailJS environment variables.')
-      setStatus('error')
+      setStatus('configuration-error')
       return
     }
 
@@ -76,6 +76,9 @@ export default function Contact() {
                     onChange={(e) => setForm({ ...form, message: e.target.value })} />
                 </div>
 
+                {status === 'configuration-error' && (
+                  <p className="text-danger mb-3">{c.form.configurationError}</p>
+                )}
                 {status === 'error' && (
                   <p className="text-danger mb-3">{c.form.error}</p>
                 )}
