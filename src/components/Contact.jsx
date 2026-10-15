@@ -84,15 +84,34 @@ export default function Contact() {
           <div className="p-5 flex flex-col items-start gap-5">
             <h3 className="text-paper">{c.whatsapp.heading}</h3>
             <p className="text-paper/70">{c.whatsapp.body}</p>
-            <a
-              href="https://wa.me/+817037919654"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-3 hover:opacity-80 transition-opacity"
-            >
-              <img src={WhatsAppIcon} alt="WhatsApp" className="w-8 h-8" />
-              <span className="text-paper font-semibold text-base">+81-70-3791-9654</span>
-            </a>
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+              <a
+                href="https://wa.me/+817037919654"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+              >
+                <img src={WhatsAppIcon} alt="WhatsApp" className="w-8 h-8" />
+                <span className="text-paper font-semibold text-base">+81-70-3791-9654</span>
+              </a>
+              <a
+                href="mailto:info@javels.com"
+                className="flex items-center gap-3 hover:opacity-80 transition-opacity"
+              >
+                <svg
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  className="w-8 h-8 text-gold-light"
+                >
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="m3 7 9 6 9-6" />
+                </svg>
+                <span className="text-paper font-semibold text-base">info@javels.com</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
