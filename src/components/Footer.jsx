@@ -4,8 +4,8 @@ import WhatsAppIcon  from '../assets/whatsapp.png'
 import { useLanguage } from '../context/LanguageContext.jsx'
 
 const socials = [
-  { label: 'Facebook',  href: 'https://facebook.com',          icon: FacebookIcon  },
-  { label: 'Instagram', href: 'https://instagram.com',         icon: InstagramIcon },
+  { label: 'Facebook',  href: 'https://www.facebook.com/share/1B6nxE2VKL/?mibextid=wwXIfr', icon: FacebookIcon  },
+  { label: 'Instagram', href: 'https://instagram.com/javels.jp?rpxt=MW9hMzF5Ym5iaGl1bg%3D%3D&utm_source=qr', icon: InstagramIcon },
   { label: 'WhatsApp',  href: 'https://wa.me/+817037919654',   icon: WhatsAppIcon  },
 ]
 
