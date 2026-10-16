@@ -120,9 +120,13 @@ The appointment form uses Stripe's Payment Element. The browser sends the
 selected service and appointment details to `/api/create-payment-intent`.
 Cloudflare Pages handles this route with
 `functions/api/create-payment-intent.js`; local development forwards the route
-to `server/index.js`. The server looks up the price and creates a PaymentIntent
-in JPY. The amount is never accepted from the browser. Card details are
+to `server/index.js`. The server looks up the price and currency and creates a
+PaymentIntent. Regular consultations are charged in JPY; the appointment list
+also includes a $1 USD Stripe payment test option. The amount is never accepted
+from the browser. Card details are
 collected by Stripe and are not handled by this application.
+With live-mode keys, the payment test option makes a real $1 charge; use Stripe
+test-mode keys and a test card to verify the flow without charging a real card.
 
 The local `.env` file must define both `VITE_STRIPE_PUBLISHABLE_KEY` (a Stripe
 publishable key beginning with `pk_`) and `STRIPE_SECRET_KEY` (a secret key

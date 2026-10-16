@@ -4,10 +4,11 @@ import Stripe from 'stripe'
 
 const app = express()
 const port = Number(process.env.PORT) || 4242
-const fees = {
-  life: 3000,
-  business: 5000,
-  education: 3000,
+const services = {
+  life: { amount: 3000, currency: 'jpy' },
+  business: { amount: 5000, currency: 'jpy' },
+  education: { amount: 3000, currency: 'jpy' },
+  'stripe-test': { amount: 100, currency: 'usd' },
 }
 const stripe = process.env.STRIPE_SECRET_KEY
   ? new Stripe(process.env.STRIPE_SECRET_KEY)
@@ -31,7 +32,7 @@ app.post('/api/create-payment-intent', async (req, res) => {
   }
 
   const { serviceId, fullName, email, date, time, notes } = req.body ?? {}
-  if (!Object.hasOwn(fees, serviceId)) {
+  if (typeof serviceId !== 'string' || !Object.hasOwn(services, serviceId)) {
     return res.status(400).json({ error: 'Select a valid consultation service.' })
   }
   if (
@@ -45,9 +46,10 @@ app.post('/api/create-payment-intent', async (req, res) => {
   }
 
   try {
+    const service = services[serviceId]
     const paymentIntent = await stripe.paymentIntents.create({
-      amount: fees[serviceId],
-      currency: 'jpy',
+      amount: service.amount,
+      currency: service.currency,
       automatic_payment_methods: { enabled: true },
       receipt_email: email,
       description: `JAVELS ${serviceId} consultation`,

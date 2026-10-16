@@ -57,6 +57,7 @@ export const translations = {
         { value: 'life',       label: 'Life consultation (housing, banking, daily life)', fee: 3000 },
         { value: 'business',   label: 'Business consultation (visa, company setup, tax)', fee: 5000 },
         { value: 'education',  label: 'Education consultation (classes, scholarships)',   fee: 3000 },
+        { value: 'stripe-test', label: 'Stripe payment test ($1 USD)', fee: 1, currency: 'USD' },
       ],
       fields: {
         fullName: 'Full name',
@@ -171,6 +172,7 @@ export const translations = {
         { value: 'life',      label: '暮らしの相談（住まい・銀行・日常生活）', fee: 3000 },
         { value: 'business',  label: 'ビジネス相談（ビザ・会社設立・税務）',  fee: 5000 },
         { value: 'education', label: '教育相談（日本語・奨学金）',             fee: 3000 },
+        { value: 'stripe-test', label: 'Stripe決済テスト（1米ドル）', fee: 1, currency: 'USD' },
       ],
       fields: {
         fullName: 'お名前',

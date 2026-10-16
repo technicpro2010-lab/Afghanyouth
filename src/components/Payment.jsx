@@ -57,7 +57,7 @@ function StripePaymentForm({ onSuccess, onBack }) {
   )
 }
 
-export default function Payment({ serviceId, amount, appointment, onSuccess, onBack, initialError }) {
+export default function Payment({ serviceId, amount, currency, appointment, onSuccess, onBack, initialError }) {
   const { lang } = useLanguage()
   const isJa = lang === 'ja'
   const [clientSecret, setClientSecret] = useState('')
@@ -107,7 +107,10 @@ export default function Payment({ serviceId, amount, appointment, onSuccess, onB
     return () => controller.abort()
   }, [serviceId, appointment, attempt, isJa])
 
-  const formattedAmount = `¥${amount.toLocaleString()}`
+  const formattedAmount = new Intl.NumberFormat(isJa ? 'ja-JP' : 'en-US', {
+    style: 'currency',
+    currency,
+  }).format(amount)
 
   return (
     <div>

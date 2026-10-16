@@ -1,7 +1,8 @@
-const fees = {
-  life: 3000,
-  business: 5000,
-  education: 3000,
+const services = {
+  life: { amount: 3000, currency: 'jpy' },
+  business: { amount: 5000, currency: 'jpy' },
+  education: { amount: 3000, currency: 'jpy' },
+  'stripe-test': { amount: 100, currency: 'usd' },
 }
 
 function json(body, status = 200) {
@@ -30,7 +31,7 @@ export async function onRequestPost({ request, env }) {
 
   const { serviceId, fullName, email, date, time, notes } = body
   if (
-    typeof serviceId !== 'string' || !Object.hasOwn(fees, serviceId) ||
+    typeof serviceId !== 'string' || !Object.hasOwn(services, serviceId) ||
     typeof fullName !== 'string' || !fullName.trim() || fullName.length > 120 ||
     typeof email !== 'string' || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || email.length > 254 ||
     typeof date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(date) ||
@@ -40,9 +41,10 @@ export async function onRequestPost({ request, env }) {
     return json({ error: 'Appointment details are incomplete or invalid.' }, 400)
   }
 
+  const service = services[serviceId]
   const stripeParams = new URLSearchParams({
-    amount: String(fees[serviceId]),
-    currency: 'jpy',
+    amount: String(service.amount),
+    currency: service.currency,
     'automatic_payment_methods[enabled]': 'true',
     receipt_email: email,
     description: `JAVELS ${serviceId} consultation`,

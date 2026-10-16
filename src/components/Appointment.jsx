@@ -32,6 +32,10 @@ export default function Appointment() {
   const [paymentReturnError, setPaymentReturnError] = useState('')
 
   const selectedService = a.serviceOptions.find((s) => s.value === form.service) || a.serviceOptions[0]
+  const formatServiceFee = (service) => new Intl.NumberFormat(isJa ? 'ja-JP' : 'en-US', {
+    style: 'currency',
+    currency: service.currency || 'JPY',
+  }).format(service.fee)
 
   useEffect(() => {
     const url = new URL(window.location.href)
@@ -137,7 +141,7 @@ export default function Appointment() {
               {a.serviceOptions.map((s) => (
                 <li key={s.value} className="flex justify-between items-center text-sm">
                   <span className="text-ink">{s.label.split('(')[0].trim()}</span>
-                  <span className="font-semibold text-navy-900">¥{s.fee.toLocaleString()}</span>
+                  <span className="font-semibold text-navy-900">{formatServiceFee(s)}</span>
                 </li>
               ))}
             </ul>
@@ -182,7 +186,7 @@ export default function Appointment() {
                   >
                     {a.serviceOptions.map((s) => (
                       <option key={s.value} value={s.value}>
-                        {s.label} — ¥{s.fee.toLocaleString()}
+                        {s.label} — {formatServiceFee(s)}
                       </option>
                     ))}
                   </select>
@@ -222,7 +226,7 @@ export default function Appointment() {
                 </div>
 
                 <button type="submit" className="btn btn-primary w-full sm:w-auto mt-2">
-                  {a.submit} — ¥{selectedService.fee.toLocaleString()}
+                  {a.submit} — {formatServiceFee(selectedService)}
                 </button>
               </form>
             )}
@@ -231,6 +235,7 @@ export default function Appointment() {
               <Payment
                 serviceId={form.service}
                 amount={selectedService.fee}
+                currency={selectedService.currency || 'JPY'}
                 appointment={form}
                 onBack={() => {
                   clearPendingAppointment()
