@@ -54,10 +54,9 @@ export const translations = {
       heading: 'Talk with us about what you need.',
       body: 'Choose your desired service, select an available date and time, and proceed to payment to finalize your booking.',
       serviceOptions: [
-        { value: 'life',       label: 'Life consultation (housing, banking, daily life)', fee: 3000 },
-        { value: 'business',   label: 'Business consultation (visa, company setup, tax)', fee: 5000 },
-        { value: 'education',  label: 'Education consultation (classes, scholarships)',   fee: 3000 },
-        { value: 'stripe-test', label: 'Stripe payment test ($1 USD)', fee: 1, currency: 'USD' },
+        { value: 'life',       label: 'Life consultation (housing, banking, daily life)', fee: 25, currency: 'USD' },
+        { value: 'business',   label: 'Business consultation (visa, company setup, tax)', fee: 35, currency: 'USD' },
+        { value: 'education',  label: 'Education consultation (classes, scholarships)',   fee: 25, currency: 'USD' },
       ],
       fields: {
         fullName: 'Full name',
@@ -169,10 +168,9 @@ export const translations = {
       heading: '必要なサポートについて、お気軽にご相談ください。',
       body:    'ご希望のサービスを選び、予約可能な日時を指定してください。予約内容を確認後、お支払いへお進みいただけます。',
       serviceOptions: [
-        { value: 'life',      label: '暮らしの相談（住まい・銀行・日常生活）', fee: 3000 },
-        { value: 'business',  label: 'ビジネス相談（ビザ・会社設立・税務）',  fee: 5000 },
-        { value: 'education', label: '教育相談（日本語・奨学金）',             fee: 3000 },
-        { value: 'stripe-test', label: 'Stripe決済テスト（1米ドル）', fee: 1, currency: 'USD' },
+        { value: 'life',      label: '暮らしの相談（住まい・銀行・日常生活）', fee: 25, currency: 'USD' },
+        { value: 'business',  label: 'ビジネス相談（ビザ・会社設立・税務）',  fee: 35, currency: 'USD' },
+        { value: 'education', label: '教育相談（日本語・奨学金）',             fee: 25, currency: 'USD' },
       ],
       fields: {
         fullName: 'お名前',

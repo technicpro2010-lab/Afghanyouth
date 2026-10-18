@@ -5,10 +5,9 @@ import Stripe from 'stripe'
 const app = express()
 const port = Number(process.env.PORT) || 4242
 const services = {
-  life: { amount: 3000, currency: 'jpy' },
-  business: { amount: 5000, currency: 'jpy' },
-  education: { amount: 3000, currency: 'jpy' },
-  'stripe-test': { amount: 100, currency: 'usd' },
+  life: { amount: 2500, currency: 'usd' },
+  business: { amount: 3500, currency: 'usd' },
+  education: { amount: 2500, currency: 'usd' },
 }
 const stripe = process.env.STRIPE_SECRET_KEY
   ? new Stripe(process.env.STRIPE_SECRET_KEY)
