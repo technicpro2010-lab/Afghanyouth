@@ -5,8 +5,7 @@ import { useLanguage } from '../context/LanguageContext.jsx'
 
 const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
-const EMAILJS_CONFIRMATION_TEMPLATE_ID =
-  import.meta.env.VITE_EMAILJS_CONFIRMATION_TEMPLATE_ID || EMAILJS_TEMPLATE_ID
+const EMAILJS_CONFIRMATION_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_CONFIRMATION_TEMPLATE_ID
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
 
 export default function Contact() {
@@ -18,7 +17,12 @@ export default function Contact() {
 
   async function handleSubmit(event) {
     event.preventDefault()
-    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+    if (
+      !EMAILJS_SERVICE_ID ||
+      !EMAILJS_TEMPLATE_ID ||
+      !EMAILJS_CONFIRMATION_TEMPLATE_ID ||
+      !EMAILJS_PUBLIC_KEY
+    ) {
       console.error('Contact form is not configured. Set the EmailJS environment variables.')
       setStatus('configuration-error')
       return
@@ -31,10 +35,11 @@ export default function Contact() {
         EMAILJS_TEMPLATE_ID,
         {
           to_email: 'info@javels.com',
-          from_name: form.name,
-          from_email: form.email,
-          reply_to: form.email,
-          message: form.message,
+          from_name: form.name.trim(),
+          from_email: 'info@javels.com',
+          client_email: form.email.trim(),
+          reply_to: form.email.trim(),
+          message: form.message.trim(),
         },
         EMAILJS_PUBLIC_KEY
       )
@@ -50,11 +55,12 @@ export default function Contact() {
         EMAILJS_SERVICE_ID,
         EMAILJS_CONFIRMATION_TEMPLATE_ID,
         {
-          to_email: form.email,
-          from_name: form.name,
-          from_email: form.email,
+          to_email: form.email.trim(),
+          from_name: form.name.trim(),
+          from_email: 'info@javels.com',
           reply_to: 'info@javels.com',
-          message: form.message,
+          message: form.message.trim(),
+          confirmation_message: c.form.confirmationMessage,
         },
         EMAILJS_PUBLIC_KEY
       )

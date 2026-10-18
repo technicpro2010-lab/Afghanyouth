@@ -40,23 +40,24 @@ for your deployment:
 
 - `VITE_EMAILJS_SERVICE_ID`
 - `VITE_EMAILJS_TEMPLATE_ID` (notification to JAVELS)
-- `VITE_EMAILJS_CONFIRMATION_TEMPLATE_ID` (optional; defaults to the notification template)
+- `VITE_EMAILJS_CONFIRMATION_TEMPLATE_ID` (confirmation to the person who submitted the form)
 - `VITE_EMAILJS_PUBLIC_KEY`
 
-Configure the notification template's **To Email** as `{{to_email}}` and
-**Reply To** as `{{reply_to}}`. It can use `{{from_name}}`, `{{from_email}}`,
-and `{{message}}` for the client's details and message. The form supplies
-`info@javels.com` as `to_email` and the client's address as `reply_to`.
+Configure the notification template's **To Email** as `{{to_email}}`, its
+**From Email** as `info@javels.com` (or the verified sender configured for your
+EmailJS service), and **Reply To** as `{{reply_to}}`. It can use
+`{{from_name}}`, `{{client_email}}`, and `{{message}}` for the client's details
+and message. The form supplies `info@javels.com` as the recipient and sender,
+and the client's address as `reply_to`.
 
-For client confirmations, create a second EmailJS template, set its **To Email**
-as `{{to_email}}`, and use `{{from_name}}` and `{{message}}` as desired in its
-body. The form supplies the submitting client's address as `to_email`. You can
-reuse the notification template ID instead; it must also use `{{to_email}}` as
-its recipient, and the client will receive the same email content as JAVELS.
-If the confirmation template ID is omitted, the form uses the notification
-template for the client copy.
-Submissions cannot be delivered until the notification template and EmailJS
-service are configured and the required environment variables are set.
+Create a separate confirmation template, set its **To Email** to
+`{{to_email}}`, and set its **From Email** to `info@javels.com` (or the verified
+sender configured for your EmailJS service). Its body can include
+`{{from_name}}`, `{{confirmation_message}}`, and `{{message}}`. The form sends
+this email to the submitting person's address, with `info@javels.com` as the
+reply-to address. The notification and confirmation templates, EmailJS service,
+and all required environment variables must be configured before submissions
+can be delivered.
 
 ## Project structure
 
