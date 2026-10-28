@@ -29,6 +29,24 @@ export const translations = {
       eyebrow: 'Our Story',
       heading: 'Connecting People, Business & Opportunities',
       body: 'JAVELS was created to bridge people with services, professionals and opportunities they need in Japan. Through multilingual support, practical coordination, education, and a growing professional network, we help individuals and businesses move forward with confidence. Our mission is simple: to connect people, business and opportunities in Japan.',
+      teamHeading: 'Our Team',
+      teamIntro: 'The team driving the vision, operations, and compliance behind JAVELS.',
+      team: [
+        {
+          name: 'Ali Rozbeh',
+          role: 'Co-Founder & Director',
+          image: '/images/ali-rozbeh.jpeg',
+          imageAlt: 'Ali Rozbeh, Co-Founder and Director',
+          bio: 'Drives strategic direction, company growth, and high-level decision-making to foster long-term partnerships and success.',
+        },
+        {
+          name: 'Shuto Kozwa',
+          role: 'Co-Founder & Administrative Scrivener',
+          image: '/images/shuto-kozwa.jpeg',
+          imageAlt: 'Shuto Kozwa, Co-Founder and Administrative Scrivener',
+          bio: 'Oversees legal compliance, administrative documentation, and corporate integrity to ensure regulatory precision.',
+        },
+      ],
     },
     services: {
       eyebrow: 'What we do',
@@ -144,6 +162,24 @@ export const translations = {
       eyebrow:       'JAVELSについて',
       heading:       '人・ビジネス・機会をつなぐ',
       body:          'JAVELSは、日本で必要なサービス、専門家、そして新たな機会へ人々をつなぐ「架け橋」となるために生まれました。多言語サポート、実務的なコーディネート、教育、そして広がり続ける専門家ネットワークを通じて、個人や事業者の皆さまが安心して次の一歩を踏み出せるようサポートします。私たちの使命はシンプルです。日本で、人・ビジネス・機会をつなぐこと。',
+      teamHeading: '私たちのチーム',
+      teamIntro: 'JAVELSのビジョン、運営、法令遵守を担うチームです。',
+      team: [
+        {
+          name: 'Ali Rozbeh',
+          role: '共同創業者・ディレクター',
+          image: '/images/ali-rozbeh.jpeg',
+          imageAlt: '共同創業者・ディレクターのAli Rozbeh',
+          bio: '長期的なパートナーシップと成長に向けて、事業の方向性や重要な意思決定を担います。',
+        },
+        {
+          name: 'Shuto Kozwa',
+          role: '共同創業者・行政書士',
+          image: '/images/shuto-kozwa.jpeg',
+          imageAlt: '共同創業者・行政書士のShuto Kozwa',
+          bio: '法令遵守や行政書類、企業としての信頼性を管理し、正確な手続きを支えます。',
+        },
+      ],
     },
     services: {
       eyebrow:    'サービス',
